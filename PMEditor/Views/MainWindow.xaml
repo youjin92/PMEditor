@@ -1,0 +1,93 @@
+﻿<Window x:Class="PMEditor.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:de="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen" 
+        AllowsTransparency="True"
+        WindowState="Maximized"
+        WindowStyle="None"
+        x:Name="rootwindow"
+        Topmost="True">
+    
+    <Window.InputBindings>
+        <KeyBinding Key="A" Modifiers="Alt" Command="{Binding CreateRectCommand}" />
+        <KeyBinding Key="S" Modifiers="Alt" Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView"/>
+        <KeyBinding Key="T" Modifiers="Alt" Command="{Binding TestCommand}" />
+        
+        <KeyBinding Key="Left" Modifiers="Ctrl" Command="{Binding MoveToUICommand}" CommandParameter="Left"/>
+        <KeyBinding Key="Right" Modifiers="Ctrl" Command="{Binding MoveToUICommand}" CommandParameter="Right"/>
+        <KeyBinding Key="Up" Modifiers="Ctrl" Command="{Binding MoveToUICommand}" CommandParameter="Up"/>
+        <KeyBinding Key="Down" Modifiers="Ctrl" Command="{Binding MoveToUICommand}" CommandParameter="Down"/>
+    </Window.InputBindings>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closed">
+            <prism:InvokeCommandAction Command="{Binding ClosedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid x:Name="rootgrid" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonDownCommand}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseMove">
+                <prism:InvokeCommandAction Command="{Binding MouseMoveCommand}"/>
+            </i:EventTrigger>
+            <i:EventTrigger EventName="MouseLeftButtonUp">
+                <prism:InvokeCommandAction Command="{Binding MouseLeftButtonUpCommand}"/>
+            </i:EventTrigger>
+            <!--<i:EventTrigger EventName="Closed">
+                <prism:InvokeCommandAction Command="{Binding ClosedCommand}"/>
+            </i:EventTrigger>-->
+        </i:Interaction.Triggers>
+
+        <StackPanel Height="30" Margin="50" Orientation="Horizontal" Background="Orange"
+                    VerticalAlignment="{Binding TextBlockVertical}" HorizontalAlignment="{Binding TextBlockHorizontal}">
+            <TextBlock Width="150" Height="30" Text="{Binding ResultText}" TextAlignment="Center" 
+                   TextWrapping="Wrap" Padding="5" Foreground="Beige" FontWeight="Bold" Margin="4,2,2,2">
+                <TextBlock.Style >
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=rootwindow, Path=IsActive}" Value="True">
+                                <Setter Property="Background" Value="Orange"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=rootwindow, Path=IsActive}" Value="False">
+                                <Setter Property="Background" Value="Gray"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Border Width="2" Background="OrangeRed" Margin="4"/>
+            <dx:SimpleButton Command="{Binding CreateRectCommand}"
+                Background="Orange" Foreground="Beige" Width="26" Height="26" Glyph="{dx:DXImage 'Images/Edit/Cut_32x32.png'}" GlyphHeight="24" GlyphWidth="24" Margin="2"/>
+            <dx:SimpleButton Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView"
+                Background="Orange" Foreground="Beige" Width="26" Height="26" Glyph="{dx:DXImage 'Images/Data Bars/SolidOrangeDataBar_32x32.png'}" GlyphHeight="24" GlyphWidth="24" Margin="2"/>
+            <Border Width="2" Background="OrangeRed" Margin="4"/>
+            <de:ToggleSwitch Background="Orange" Foreground="Beige" Width="100" Height="26" Margin="2,2,2,2"  UncheckedStateContent="off" CheckedStateContent="on" ContentPlacement="Both">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="Checked"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="Unchecked">
+                        <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="UnChecked"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </de:ToggleSwitch>
+            <Border Width="2" Background="OrangeRed" Margin="4"/>
+            <dx:SimpleButton Click="CloseButton_Click" Background="Orange" Foreground="Beige" Width="26" Height="26" 
+                             Glyph="{dx:DXImage 'Images/Spreadsheet/RemovePivotField_32x32.png'}" 
+                             GlyphHeight="24" GlyphWidth="24" Margin="2"/>
+        </StackPanel>
+
+        <Border x:Name="bgBorder" 
+                Width="{Binding ElementName=rootwindow, Path=ActualWidth}" Height="{Binding ElementName=rootwindow, Path=ActualHeight}"
+                Visibility="{Binding IsBorderVisible}" Background="Orange" Opacity="0.2"/>
+    </Grid>
+</Window>
