@@ -35,6 +35,8 @@ namespace PMEditor.ViewModels
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             _dialogService = dialogService;
+
+            _eventAggregator.GetEvent<CaptureAndContrastImageEvent>().Subscribe(SaveCaptureImageAndContrastImageFromEvent);
         }
 
         #region 프로퍼티
@@ -43,6 +45,7 @@ namespace PMEditor.ViewModels
         public HorizontalAlignment TextBlockHorizontal { get; set; } = HorizontalAlignment.Left;
         public VerticalAlignment TextBlockVertical { get; set; } = VerticalAlignment.Top;
         public string ResultText { get; set; } = "PMEditor";
+        public bool IsOcrThreadChecked { get; set; }
         #endregion
 
         #region 필드
@@ -55,7 +58,7 @@ namespace PMEditor.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
         public Thread OCRThread;
-        ImageCapureWindow PropertyWindow = null;
+        InfoSubWinodow PropertyWindow = null;        
         #endregion
 
         #region 커멘드
@@ -175,53 +178,35 @@ namespace PMEditor.ViewModels
         public DelegateCommand<string> PropertyViewVisibleCommand =>_PropertyViewVisibleCommand ?? (_PropertyViewVisibleCommand = new DelegateCommand<string>(ExecutePropertyViewVisibleCommandName));
         void ExecutePropertyViewVisibleCommandName(string param)
         {
-            //DispatcherService.Invoke((System.Action)(() =>
-            //{
-            //    switch (param)
-            //    {
-            //        case "PropertyView":
-            //            {
-            //                if (PropertyWindow == null)
-            //                {
-            //                    PropertyWindow = new ImageCapureWindow();
-            //                    PropertyWindow.mainGrid.Children.Add(new PropertyView());
-            //                    PropertyWindow.Closed += TempClosed;
-            //                    PropertyWindow.Show();
-
-
-
-            //                    break;
-            //                }
-            //                else
-            //                {
-            //                    PropertyWindow.Focus();
-            //                    break;       
-            //                }
-            //            }
-            //        default:
-            //            break;
-            //    }
-            //}));
-
-            //void TempClosed(object sender, EventArgs e)
-            //{
-            //    PropertyWindow = null;
-            //}
-
-            DialogParameters args = new DialogParameters();
-            args.Add("TestKey", "TestValue");
-
-            _dialogService.Show("InfoDialogView", args, r =>
+            DispatcherService.Invoke((System.Action)(() =>
             {
-                DialogParameters resultParameter = r.Parameters as DialogParameters;
-                ButtonResult result = (ButtonResult)r.Result;
-
-                if (result == ButtonResult.OK)
+                switch (param)
                 {
-
+                    case "PropertyView":
+                        {
+                            if (PropertyWindow == null)
+                            {
+                                PropertyWindow = new InfoSubWinodow();
+                                //PropertyWindow.mainGrid.Children.Add(new PropertyView());
+                                PropertyWindow.Closed += TempClosed;
+                                PropertyWindow.Show();
+                                break;
+                            }
+                            else
+                            {
+                                PropertyWindow.Focus();
+                                break;
+                            }
+                        }
+                    default:
+                        break;
                 }
-            });
+            }));
 
+            void TempClosed(object sender, EventArgs e)
+            {
+                PropertyWindow = null;
+            }
         }
 
         private DelegateCommand<string> _OCRToggleCommand;
@@ -238,15 +223,18 @@ namespace PMEditor.ViewModels
                             {
                                 while (true)
                                 {
-                                    SaveCaptureImage();
-                                    DispatcherService.Invoke((System.Action)(() =>
+                                    SaveCaptureImageAndContrastImage();
+
+                                    string ocredText = OCRManager.OCR($"{FileManager.ImageRootPath}\\contract.png");
+                                    ResultText = ocredText;
+
+                                    if (ResultText.Length <= 15)
                                     {
-                                        ResultText = OCRManager.ImageContrastAndOCR();
-                                        _eventAggregator.GetEvent<SearchItemEvent>().Publish(new EventParam(ResultText));
-
-                                    }));
-
-                                    Thread.Sleep(1500);
+                                        DispatcherService.Invoke((System.Action)(() =>
+                                        {
+                                            _eventAggregator.GetEvent<SearchItemEvent>().Publish(new EventParam(ResultText));
+                                        }));
+                                    }
                                 }
                             });
                             OCRThread.Start();
@@ -328,39 +316,20 @@ namespace PMEditor.ViewModels
             currentVisibleRect.StrokeDashArray = new DoubleCollection(); ;
         }
 
-        private void SaveCaptureImage()
+        private void SaveCaptureImageAndContrastImageFromEvent()
         {
-            CapureManager.ImageCapture((int)OCRRect.X, (int)OCRRect.Y, (int)OCRRect.Width, (int)OCRRect.Height, $"{FileManager.ImageRootPath}\\capture.png");
-            CutAsBorder($"{FileManager.ImageRootPath}\\capture.png");
+            if (!IsOcrThreadChecked)
+            {
+                SaveCaptureImageAndContrastImage();
+            }
         }
 
-        private void CutAsBorder(string Path)
+        private void SaveCaptureImageAndContrastImage()
         {
-            if (FileManager.IsFileExist(Path) && OCRRect != null )
-            {
-                try
-                {
-                    using (Bitmap bitmap = new Bitmap(Path))
-                    {
-                        using (Bitmap cropedBitmap = new Bitmap(bitmap.Size.Width - 4, bitmap.Size.Height - 4))
-                        {
-                            using (Graphics g = Graphics.FromImage(cropedBitmap))
-                            {
-                                g.DrawImage(bitmap, -2, -2);
-                                g.Dispose();
-                            }
-                            bitmap.Dispose();
+            CapureManager.SaveCaptureImage((int)OCRRect.X, (int)OCRRect.Y, (int)OCRRect.Width, (int)OCRRect.Height, $"{FileManager.ImageRootPath}\\capture.png");
+            CapureManager.CutAsBorder($"{FileManager.ImageRootPath}\\capture.png", OCRRect);
 
-                            cropedBitmap.Save(Path, System.Drawing.Imaging.ImageFormat.Png);
-                            cropedBitmap.Dispose();
-                        }
-                    }
-                }
-                catch
-                { }
-
-            }
-
+            CapureManager.SaveContrastImage();
         }
 
         private void ClearRectagle()

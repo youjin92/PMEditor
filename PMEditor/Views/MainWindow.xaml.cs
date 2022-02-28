@@ -30,7 +30,6 @@ namespace PMEditor.Views
             _dialogService = dialogService;
 
             System.IO.Directory.CreateDirectory(FileManager.ImageRootPath);
-            System.IO.Directory.CreateDirectory(FileManager.ContractImagePath);
             System.IO.Directory.CreateDirectory(FileManager.DBPath);
 
             var vm = new MainWindowViewModel(this.rootgrid, _eventAggregator, _regionManager, _dialogService);

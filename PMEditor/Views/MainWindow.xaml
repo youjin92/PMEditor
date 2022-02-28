@@ -70,7 +70,8 @@
             <dx:SimpleButton Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView"
                 Background="Orange" Foreground="Beige" Width="26" Height="26" Glyph="{dx:DXImage 'Images/Data Bars/SolidOrangeDataBar_32x32.png'}" GlyphHeight="24" GlyphWidth="24" Margin="2"/>
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-            <de:ToggleSwitch Background="Orange" Foreground="Beige" Width="100" Height="26" Margin="2,2,2,2"  UncheckedStateContent="off" CheckedStateContent="on" ContentPlacement="Both">
+            <de:ToggleSwitch Background="Orange" Foreground="Beige" Width="100" Height="26" Margin="2,2,2,2"  UncheckedStateContent="off" CheckedStateContent="on" ContentPlacement="Both"
+                             IsChecked="{Binding IsOcrThreadChecked}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Checked">
                         <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="Checked"/>
@@ -84,6 +85,8 @@
             <dx:SimpleButton Click="CloseButton_Click" Background="Orange" Foreground="Beige" Width="26" Height="26" 
                              Glyph="{dx:DXImage 'Images/Spreadsheet/RemovePivotField_32x32.png'}" 
                              GlyphHeight="24" GlyphWidth="24" Margin="2"/>
+            
+       
         </StackPanel>
 
         <Border x:Name="bgBorder" 

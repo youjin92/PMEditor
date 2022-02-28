@@ -21,7 +21,7 @@ namespace PMEditor.ViewModels
     {
         #region 프로퍼티
         public ObservableCollection<Poketmon> ListBoxList { get; set; } = new ObservableCollection<Poketmon>();
-        public string SearchText { get; set; } = "Test";
+        public string SearchText { get; set; }
         public Poketmon SelectedItem { get; set; } = new Poketmon();
         #endregion
 

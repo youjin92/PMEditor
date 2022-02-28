@@ -10,7 +10,7 @@ namespace Common
     public static class FileManager
     {
         public static  string ImageRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "image");
-        public static  string ContractImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "contract");
+        public static  string ContractImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "image");
         public static string DBPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataBase");
 
         public static  string TessadataFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tessdata");
