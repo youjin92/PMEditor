@@ -35,7 +35,6 @@ namespace PMEditor
             containerRegistry.RegisterForNavigation<ExcelInfoResultView>();
             containerRegistry.RegisterForNavigation<LoadingView>();
             containerRegistry.RegisterDialog<InfoDialogView>();
-            containerRegistry.RegisterDialog<InfoSubWindow>();
 
         }
 
