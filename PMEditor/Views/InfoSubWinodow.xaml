@@ -102,6 +102,9 @@
                 </TabItem>
 
                 <TabItem Header="{materialDesign:PackIcon Kind=Abc, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:TTSTestView/>
+                    </Border>
                 </TabItem>
 
             </TabControl>

@@ -37,7 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>PMIcon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v19.2, Version=19.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
@@ -188,6 +189,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 19.2\Components\Bin\Framework\DevExpress.Xpf.Themes.VS2017Light.v19.2.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -216,6 +221,7 @@
     <Compile Include="ViewModels\LoadingWindowViewModel.cs" />
     <Compile Include="ViewModels\PropertyViewModel.cs" />
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
+    <Compile Include="ViewModels\TTSTestViewModel.cs" />
     <Compile Include="Views\InfoSubWinodow.xaml.cs">
       <DependentUpon>InfoSubWinodow.xaml</DependentUpon>
     </Compile>
@@ -233,6 +239,9 @@
     </Compile>
     <Compile Include="Views\SimpleImageView.xaml.cs">
       <DependentUpon>SimpleImageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TTSTestView.xaml.cs">
+      <DependentUpon>TTSTestView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ExcelInfoResultView.xaml">
       <SubType>Designer</SubType>
@@ -276,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SimpleImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TTSTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,9 +356,6 @@
       <Project>{43ca7f5b-1d7f-45e9-8c16-e9d5dc0192c2}</Project>
       <Name>Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="PMIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
