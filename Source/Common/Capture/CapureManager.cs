@@ -40,7 +40,7 @@ namespace Common.Capture
 
         public static void SaveCaptureImage(int refX = 0, int refY = 0, int imgW = 0, int imgH = 0, string filepath = "")
         {
-            if (imgW == 0 || imgH == 0)
+            if (imgW == 0 || imgH == 0 || !FileManager.IsFileExist(filepath))
                 return;
 
             using (System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap((int)imgW, (int)imgH))
@@ -60,6 +60,9 @@ namespace Common.Capture
 
         public static void SaveContrastImage()
         {
+            if(!FileManager.IsFileExist($"{FileManager.ImageRootPath}\\capture.png"))
+                    return;
+
             //이진화 변환.
             using (Bitmap currentBitmap = new Bitmap($"{FileManager.ImageRootPath}\\capture.png"))
             {

@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.Speech;
 using Microsoft.Speech.Synthesis;
 using System.ComponentModel;
+using Common;
 
 namespace PMEditor.ViewModels
 {
@@ -21,6 +22,12 @@ namespace PMEditor.ViewModels
 
         #region 프로퍼티
         public string TextMessage { get; set; } = "Test";
+
+        public string FileName { get; set; }
+        public string Result { get; set; } = "Not Yet";
+
+        public string FileName2 { get; set; }
+        public string Result2 { get; set; } = "Not Yet";
         #endregion
 
         public TTSTestViewModel()
@@ -39,6 +46,28 @@ namespace PMEditor.ViewModels
         {
             if(!worker.IsBusy)
                 worker.RunWorkerAsync();
+        }
+
+        private DelegateCommand _SearchInstalledFileCommand;
+        public DelegateCommand SearchInstalledFileCommand =>_SearchInstalledFileCommand ?? (_SearchInstalledFileCommand = new DelegateCommand(ExecuteSearchInstalledFileCommand));
+        void ExecuteSearchInstalledFileCommand()
+        {
+            //"Microsoft Server Speech Platform Runtime (x86)"
+            //"Microsoft Speech Platform SDK (x86) v11.0"
+            //"Microsoft Server Speech Text to Speech Voice (ko-KR, Heami)"
+            bool result = FileManager.CheckInstalledApplications(FileName);
+
+            if (result)
+                Result = "Success ( " + FileName + " )";
+            else
+                Result = "Fail ( " + FileName + " )"; ;
+        }
+
+        private DelegateCommand _InstallFileCommand;
+        public DelegateCommand InstallFileCommand =>_InstallFileCommand ?? (_InstallFileCommand = new DelegateCommand(ExecuteInstallFileCommand));
+        void ExecuteInstallFileCommand()
+        {
+            FileManager.InstallApplication("MicrosoftSpeechPlatformSDK.msi", true);
         }
         #endregion
 

@@ -8,8 +8,10 @@ using Prism.Regions;
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using static Common.CommonManager;
 
 namespace PMEditor
 {
@@ -53,22 +55,40 @@ namespace PMEditor
 
         protected override void Initialize()
         {
-            //public static Thread thread;
-            //thread = new Thread(() =>
-            //{
+            Thread thread;
+            string LoadingText = "Test";
 
-            //    LoadingWindow w = new LoadingWindow();
-            //    w.DataContext = new LoadingWindowViewModel();
-            //    loadingWindow = w;
-            //    w.Show();
+            thread = new Thread(() =>
+            {
+                LoadingWindow w = new LoadingWindow();
+                w.DataContext = new LoadingWindowViewModel();
+                (w.DataContext as LoadingWindowViewModel).LoadingText = LoadingText;
+                w.Closed += (sender2, e2) => w.Dispatcher.InvokeShutdown();
+                w.Show();
 
-            //    w.Closed += (sender2, e2) => w.Dispatcher.InvokeShutdown();
+                Dispatcher.Run();
+            });
 
-            //    Dispatcher.Run();
-            //});
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
 
-            //thread.SetApartmentState(ApartmentState.STA);
-            //thread.Start();
+            if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Platform Runtime (x86)"))
+            {
+                LoadingText = "Microsoft Server Speech Platform Runtime (x86) 설치중...";
+                FileManager.InstallApplication("SpeechPlatformRuntime.msi", true);
+            }
+            if (!FileManager.CheckInstalledApplications("Microsoft Speech Platform SDK (x86) v11.0"))
+            {
+                LoadingText = "Microsoft Speech Platform SDK(x86) v11.0 설치중...";
+                FileManager.InstallApplication("MicrosoftSpeechPlatformSDK.msi", true);
+            }
+            if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Text to Speech Voice (ko-KR, Heami)"))
+            {
+                LoadingText = "Microsoft Server Speech Text to Speech Voice(ko - KR, Heami) 설치중...";
+                FileManager.InstallApplication("MSSpeech_TTS_ko-KR_Heami.msi", true);
+            }
+
+            thread.Abort();
 
             base.Initialize();
 

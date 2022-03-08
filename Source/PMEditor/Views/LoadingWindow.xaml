@@ -8,6 +8,7 @@
         WindowStartupLocation="CenterScreen"
         BorderThickness="10"
         BorderBrush="Orange"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="LoadingWindow" Height="300" Width="600">
 
@@ -63,7 +64,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding Name}" Foreground="Beige" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="64"/>
+        <TextBlock Text="{Binding Name}" Foreground="Beige" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40" Margin="0,100,0,0"/>
 
         <AdornerDecorator Grid.Row="1">
             <Grid>
@@ -88,9 +89,6 @@
                 </LinearGradientBrush>
             </Rectangle.Stroke>
         </Rectangle>
-
-        <!--<Image Grid.RowSpan="2" gif:ImageBehavior.AnimatedSource="pack://application:,,,/Common;component/Images/loading_round.gif" 
-                   VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="25" Margin="90"/>-->
 
         <TextBlock  Grid.RowSpan="2"  Text ="{Binding LoadingText}" TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30" Foreground="Beige"/>
     </Grid>

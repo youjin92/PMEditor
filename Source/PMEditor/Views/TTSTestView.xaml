@@ -8,9 +8,22 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
            
         <TextBox Grid.Row="0" Text="{Binding TextMessage}" Padding="10" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
         <Button  Grid.Row="1" Margin="10" Command="{Binding TTSCommand}" Content="한글음성테스트"/>
+
+        <StackPanel Grid.Row="2" Orientation="Vertical" Background="Green">
+            <TextBox Text="{Binding FileName}" Padding="10" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
+            <Button Command="{Binding SearchInstalledFileCommand}" Content="설치된파일 검색" Margin="10"/>
+            <TextBox Text="{Binding Result}" Padding="10" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Vertical" Background="Navy">
+            <TextBox Text="{Binding FileName2}" Padding="10" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
+            <Button Command="{Binding InstallFileCommand}" Content="설치실행" Margin="10"/>
+            <TextBox Text="{Binding Result2}" Padding="10" VerticalContentAlignment="Center" Margin="5,0,5,0"/>
+        </StackPanel>
     </Grid>
 </UserControl>

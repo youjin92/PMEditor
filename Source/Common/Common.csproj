@@ -156,6 +156,15 @@
     <None Include="DataBase\Poketmon.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Download\MicrosoftSpeechPlatformSDK.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Download\MSSpeech_TTS_ko-KR_Heami.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Download\SpeechPlatformRuntime.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Fonts\Cafe24SsurroundAir.ttf" />
     <None Include="Fonts\NANUMGOTHICBOLD.TTF" />
     <None Include="Fonts\NANUMGOTHICEXTRABOLD.TTF" />
@@ -204,17 +213,13 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\close.png">
+    <Content Include="Images\capture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\document.png" />
-    <Resource Include="Images\loading.png">
+    </Content>
+    <Content Include="Images\contract.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Content Include="Images\PMIcon.ico" />
-    <Resource Include="Images\siccor.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\DialogStyle.xaml">

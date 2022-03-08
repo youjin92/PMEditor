@@ -187,7 +187,6 @@ namespace PMEditor.ViewModels
                             if (PropertyWindow == null)
                             {
                                 PropertyWindow = new InfoSubWinodow();
-                                //PropertyWindow.mainGrid.Children.Add(new PropertyView());
                                 PropertyWindow.Closed += TempClosed;
                                 PropertyWindow.Show();
                                 break;
