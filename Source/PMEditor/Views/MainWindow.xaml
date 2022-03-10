@@ -4,8 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-        xmlns:de="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Background="Transparent"
         WindowStartupLocation="CenterScreen" 
         AllowsTransparency="True"
@@ -47,7 +46,7 @@
             </i:EventTrigger>-->
         </i:Interaction.Triggers>
 
-        <StackPanel Height="30" Margin="50" Orientation="Horizontal" Background="Orange"
+        <StackPanel Height="40" Margin="50" Orientation="Horizontal" Background="Orange"
                     VerticalAlignment="{Binding TextBlockVertical}" HorizontalAlignment="{Binding TextBlockHorizontal}">
             <TextBlock Width="150" Height="30" Text="{Binding ResultText}" TextAlignment="Center" 
                    TextWrapping="Wrap" Padding="5" Foreground="Beige" FontWeight="Bold" Margin="4,2,2,2">
@@ -65,28 +64,68 @@
                 </TextBlock.Style>
             </TextBlock>
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-            <dx:SimpleButton Command="{Binding CreateRectCommand}"
-                Background="Orange" Foreground="Beige" Width="26" Height="26" Glyph="{dx:DXImage 'Images/Edit/Cut_32x32.png'}" GlyphHeight="24" GlyphWidth="24" Margin="2"/>
-            <dx:SimpleButton Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView"
-                Background="Orange" Foreground="Beige" Width="26" Height="26" Glyph="{dx:DXImage 'Images/Data Bars/SolidOrangeDataBar_32x32.png'}" GlyphHeight="24" GlyphWidth="24" Margin="2"/>
+
+            <Button Command="{Binding CreateRectCommand}" Background="Violet"
+                Width="26" Height="26" Margin="2"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="영역선택">
+
+                <materialDesign:PackIcon Kind="ShapeRectanglePlus" />
+            </Button>
+            <Button Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView" Background="GreenYellow"
+                Width="26" Height="26" Margin="2"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="서브윈도우 열기">
+
+                <materialDesign:PackIcon Kind="Monitor" />
+            </Button>
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-            <de:ToggleSwitch Background="Orange" Foreground="Beige" Width="100" Height="26" Margin="2,2,2,2"  UncheckedStateContent="off" CheckedStateContent="on" ContentPlacement="Both"
-                             IsChecked="{Binding IsOcrThreadChecked}">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Checked">
-                        <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="Checked"/>
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="Unchecked">
-                        <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="UnChecked"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </de:ToggleSwitch>
+  
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" Height="26">
+                <TextBlock Text="OCR모드 : " HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text="Off " HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                <ToggleButton Background="NavajoWhite" 
+                    ToolTip="Cut Off" 
+                    Height="25"
+                    Style="{StaticResource MaterialDesignSwitchToggleButton}">
+
+                    <materialDesign:PackIcon Kind="Magnify" RenderTransformOrigin=".5,.5">
+                        <materialDesign:PackIcon.RenderTransform>
+                            <RotateTransform Angle="45" />
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+
+                    <materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Magnify" />
+                    </materialDesign:ToggleButtonAssist.OnContent>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Checked">
+                            <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="Checked"/>
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="Unchecked">
+                            <prism:InvokeCommandAction Command="{Binding OCRToggleCommand}" CommandParameter="UnChecked"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                </ToggleButton>
+                <TextBlock Text=" On" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+            </StackPanel>
+
+
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-            <dx:SimpleButton Click="CloseButton_Click" Background="Orange" Foreground="Beige" Width="26" Height="26" 
-                             Glyph="{dx:DXImage 'Images/Spreadsheet/RemovePivotField_32x32.png'}" 
-                             GlyphHeight="24" GlyphWidth="24" Margin="2"/>
-            
-       
+            <Button Background="Gray"
+                Width="26" Height="26" Margin="2"
+                Click="CloseButton_Click" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="닫기">
+
+                <materialDesign:PackIcon Kind="Close" />
+            </Button>
+
+            <Border Width="1" Background="Orange" Margin="4"/>
+
         </StackPanel>
 
         <Border x:Name="bgBorder" 

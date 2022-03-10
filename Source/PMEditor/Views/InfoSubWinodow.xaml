@@ -4,9 +4,6 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:views="clr-namespace:PMEditor.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             xmlns:de="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:viewmodels="clr-namespace:PMEditor.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True" Title="{Binding Title}"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         WindowStartupLocation="CenterScreen"
@@ -25,36 +22,67 @@
         <!--#region 배경색을 바꾸거나 아이콘을 넣는 등 커스터마이징할 수 있음.-->
         <DockPanel Grid.Row="0" Background="Orange" LastChildFill="False">
             <DockPanel.Resources>
-                <Style TargetType="{x:Type dx:SimpleButton}">
-                    <Setter Property="DockPanel.Dock" Value="Right"/>
+                <Style TargetType="Button">
                     <!-- WindowChrome의 caption위에 있는 버튼을 클릭하려면 True로 설정해야 함. -->
                     <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-                    <Setter Property="Background" Value="AliceBlue"/>
-                    <Setter Property="Foreground" Value="Beige"/>
                     <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Width" Value="26"/>
-                    <Setter Property="Height" Value="26"/>
-                    <Setter Property="GlyphHeight" Value="22"/>
-                    <Setter Property="GlyphWidth" Value="22"/>
-
+                    <Setter Property="Width" Value="20"/>
+                    <Setter Property="Height" Value="20"/>
                 </Style>
-            </DockPanel.Resources>
+                </DockPanel.Resources>
+            
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                 <Image Source="pack://application:,,,/Common;component/Images/PMIcon.png" DockPanel.Dock="Left" Margin="4"/>
-                <TextBlock Margin="2" Text="PoketMon PropertyWindow" 
+                <TextBlock Margin="2" Text="TestWindow" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"  FontWeight="Bold" FontSize="14"/>
             </StackPanel >
 
+            <Button 
+                Width="20" Height="20" DockPanel.Dock="Right" WindowChrome.IsHitTestVisibleInChrome="True"
+                Margin="2,2,4,2"
+                Click="ButtonClose_Click" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="닫기">
+                
+                <materialDesign:PackIcon Kind="Close" />
+            </Button>
+            
+            <Button 
+                Width="20" Height="20" DockPanel.Dock="Right" WindowChrome.IsHitTestVisibleInChrome="True" Margin="2"
+                Click="ButtonMaximized_Click" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="최대화">
 
-            <dx:SimpleButton Click="ButtonClose_Click" Glyph="{dx:DXImage 'GrayScaleImages/Edit/Delete_32x32.png'}" Margin="2,2,4,2"/>
-            <dx:SimpleButton Click="ButtonMaximized_Click" Glyph="{dx:DXImage 'GrayScaleImages/Page/PaperKind_Letter.png'}" Margin="2"/>
-            <dx:SimpleButton Click="ButtonMinimize_Click" Glyph="{dx:DXImage 'GrayScaleImages/Navigation/Next_32x32.png'}" Margin="2"/>
+                <materialDesign:PackIcon Kind="WindowMaximize" />
+            </Button>
 
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="4"  HorizontalAlignment="Center">
-                <TextBlock Margin="2"  Text="TopMost " 
-                           HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
-                <de:ToggleSwitch  Width="100" Height="26" Margin="0,0,2,0" WindowChrome.IsHitTestVisibleInChrome="True"
-                             UncheckedStateContent="off" CheckedStateContent="on" ContentPlacement="Both">
+            <Button 
+                Width="20" Height="20" DockPanel.Dock="Right" WindowChrome.IsHitTestVisibleInChrome="True" Margin="2"
+                Click="ButtonMinimize_Click" 
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="최소화">
+
+                <materialDesign:PackIcon Kind="WindowMinimize" />
+            </Button>
+
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                <TextBlock Text="TopMost : " HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Text="Off " HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                <ToggleButton Background="NavajoWhite" 
+                    ToolTip="Cut Off" 
+                    WindowChrome.IsHitTestVisibleInChrome="True"
+                    Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                    
+                    <materialDesign:PackIcon Kind="Pin" RenderTransformOrigin=".5,.5">
+                        <materialDesign:PackIcon.RenderTransform>
+                            <RotateTransform Angle="45" />
+                        </materialDesign:PackIcon.RenderTransform>
+                    </materialDesign:PackIcon>
+                    
+                    <materialDesign:ToggleButtonAssist.OnContent>
+                        <materialDesign:PackIcon Kind="Pin" />
+                    </materialDesign:ToggleButtonAssist.OnContent> 
+                    
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Checked">
                             <prism:InvokeCommandAction Command="{Binding TopMostSettingCommand}" CommandParameter="Checked"/>
@@ -63,27 +91,18 @@
                             <prism:InvokeCommandAction Command="{Binding TopMostSettingCommand}" CommandParameter="UnChecked"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </de:ToggleSwitch>
+                    
+                </ToggleButton>
+                <TextBlock Text=" On" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
             </StackPanel>
-
-
         </DockPanel>
         <!--#endregion-->
 
         <Grid Grid.Row="1" x:Name="mainGrid"  >
-            
-            <Grid.Resources>
-                <DataTemplate x:Key="PropertyView">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="{dx:DXImage 'Office2013/Reports/InsertHeader_32x32.png'}"/>
-                        <TextBlock Text="특성 창" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </Grid.Resources>
-            
+
             <TabControl TabStripPlacement="Left" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
 
-                <TabItem Header="{materialDesign:PackIcon Kind=FileDocument, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}" >
+                <TabItem Header="{materialDesign:PackIcon Kind=FileDocument, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:PropertyView />
                     </Border>

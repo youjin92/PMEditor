@@ -55,43 +55,61 @@ namespace PMEditor
 
         protected override void Initialize()
         {
-            Thread thread;
-            string LoadingText = "Test";
 
-            thread = new Thread(() =>
-            {
-                LoadingWindow w = new LoadingWindow();
-                w.DataContext = new LoadingWindowViewModel();
-                (w.DataContext as LoadingWindowViewModel).LoadingText = LoadingText;
-                w.Closed += (sender2, e2) => w.Dispatcher.InvokeShutdown();
-                w.Show();
-
-                Dispatcher.Run();
-            });
-
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
+            bool isNeedInstallFile = false;
 
             if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Platform Runtime (x86)"))
             {
-                LoadingText = "Microsoft Server Speech Platform Runtime (x86) 설치중...";
-                FileManager.InstallApplication("SpeechPlatformRuntime.msi", true);
+                isNeedInstallFile = true;
             }
             if (!FileManager.CheckInstalledApplications("Microsoft Speech Platform SDK (x86) v11.0"))
             {
-                LoadingText = "Microsoft Speech Platform SDK(x86) v11.0 설치중...";
-                FileManager.InstallApplication("MicrosoftSpeechPlatformSDK.msi", true);
+                isNeedInstallFile = true;
             }
             if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Text to Speech Voice (ko-KR, Heami)"))
             {
-                LoadingText = "Microsoft Server Speech Text to Speech Voice(ko - KR, Heami) 설치중...";
-                FileManager.InstallApplication("MSSpeech_TTS_ko-KR_Heami.msi", true);
+                isNeedInstallFile = true;
             }
 
-            thread.Abort();
+            if (isNeedInstallFile)
+            {
+                Thread thread;
+                string LoadingText = "Test";
+
+                thread = new Thread(() =>
+                {
+                    LoadingWindow w = new LoadingWindow();
+                    w.DataContext = new LoadingWindowViewModel();
+                    (w.DataContext as LoadingWindowViewModel).LoadingText = LoadingText;
+                    w.Closed += (sender2, e2) => w.Dispatcher.InvokeShutdown();
+                    w.Show();
+
+                    Dispatcher.Run();
+                });
+
+                thread.SetApartmentState(ApartmentState.STA);
+                thread.Start();
+
+                if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Platform Runtime (x86)"))
+                {
+                    LoadingText = "Microsoft Server Speech Platform Runtime (x86) 설치중...";
+                    FileManager.InstallApplication("SpeechPlatformRuntime.msi", true);
+                }
+                if (!FileManager.CheckInstalledApplications("Microsoft Speech Platform SDK (x86) v11.0"))
+                {
+                    LoadingText = "Microsoft Speech Platform SDK(x86) v11.0 설치중...";
+                    FileManager.InstallApplication("MicrosoftSpeechPlatformSDK.msi", true);
+                }
+                if (!FileManager.CheckInstalledApplications("Microsoft Server Speech Text to Speech Voice (ko-KR, Heami)"))
+                {
+                    LoadingText = "Microsoft Server Speech Text to Speech Voice(ko - KR, Heami) 설치중...";
+                    FileManager.InstallApplication("MSSpeech_TTS_ko-KR_Heami.msi", true);
+                }
+
+                thread.Abort();
+            }
 
             base.Initialize();
-
         }
 
 

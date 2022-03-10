@@ -11,7 +11,8 @@
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <prism:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=mainUC, Path=FileName}"/>
+            <!--<prism:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=mainUC, Path=FileName}"/>-->
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=mainUC, Path=FileName}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -64,7 +65,8 @@
                         VerticalAlignment="Center">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="ValueChanged">
-                            <prism:InvokeCommandAction Command="{Binding ValueChangedCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding ValueChangedCommand}"/>
+                            <!--<prism:InvokeCommandAction Command="{Binding ValueChangedCommand}"/>-->
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Slider>
