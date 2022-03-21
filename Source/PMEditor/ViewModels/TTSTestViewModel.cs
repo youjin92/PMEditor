@@ -28,6 +28,8 @@ namespace PMEditor.ViewModels
 
         public string FileName2 { get; set; }
         public string Result2 { get; set; } = "Not Yet";
+
+        public string FileOutputText { get; set; } = "FileOutputText";
         #endregion
 
         public TTSTestViewModel()
@@ -68,6 +70,34 @@ namespace PMEditor.ViewModels
         void ExecuteInstallFileCommand()
         {
             FileManager.InstallApplication("MicrosoftSpeechPlatformSDK.msi", true);
+        }
+
+        private DelegateCommand _DropCommand;
+        public DelegateCommand DropCommand => _DropCommand ?? (_DropCommand = new DelegateCommand(ExecuteDropCommand));
+        void ExecuteDropCommand()
+        {
+            Console.WriteLine("ExecuteDropCommand");
+        }
+
+        private DelegateCommand _DragEnterCommand;
+        public DelegateCommand DragEnterCommand => _DragEnterCommand ?? (_DragEnterCommand = new DelegateCommand(ExecuteDragEnterCommand));
+        void ExecuteDragEnterCommand()
+        {
+            Console.WriteLine("ExecuteDragEnterCommand");
+        }
+
+        private DelegateCommand _DragLeaveCommand;
+        public DelegateCommand DragLeaveCommand => _DragLeaveCommand ?? (_DragLeaveCommand = new DelegateCommand(ExecuteDragLeaveCommand));
+        void ExecuteDragLeaveCommand()
+        {
+            Console.WriteLine("ExecuteDragLeaveCommand");
+        }
+
+        private DelegateCommand _LoadedCommand;
+        public DelegateCommand LoadedCommand => _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(ExecuteLoadedCommand));
+        void ExecuteLoadedCommand()
+        {
+            Console.WriteLine("ExecuteLoadedCommand");
         }
         #endregion
 

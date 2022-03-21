@@ -218,6 +218,7 @@ namespace PMEditor.ViewModels
                 {
                     case "Checked":
                         {
+                            OCRManager.IsOcrRunning = true;
                             OCRThread = new Thread(() =>
                             {
                                 while (true)
@@ -241,6 +242,7 @@ namespace PMEditor.ViewModels
                         }
                     case "UnChecked":
                         {
+                            OCRManager.IsOcrRunning = false;
                             OCRThread.Abort();
                             break;
                         }

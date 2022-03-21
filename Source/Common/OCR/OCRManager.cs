@@ -11,6 +11,11 @@ namespace Common.OCR
 {
     public class OCRManager
     {
+
+        #region 필드
+        public static bool IsOcrRunning = false;
+        #endregion
+
         #region 비트맵 구하기 - GetBitmap(filePath)
 
         /// <summary>

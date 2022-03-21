@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -39,6 +40,15 @@ namespace PMEditor.ViewModels
         public DelegateCommand RefreshCommand =>_RefreshCommand ?? (_RefreshCommand = new DelegateCommand(ExecuteRefreshCommand));
         void ExecuteRefreshCommand()
         {
+            if (OCRManager.IsOcrRunning)
+            {
+                System.Windows.Forms.MessageBox.Show("어플리케이션 OCR모드가 켜져 있습니다. \nOCR모드를 Off 하고 시도해주세요.",
+                "Error",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);  
+                return;
+            }
+
             _eventAggregator.GetEvent<CaptureAndContrastImageEvent>().Publish();
 
             string source_file = $"{FileManager.ImageRootPath}\\{FileName}";

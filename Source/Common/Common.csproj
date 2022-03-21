@@ -130,6 +130,19 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="Markups\CommonImageSourceExtension.cs" />
     <Compile Include="Markups\EnumBindingSourceExtension.cs" />
+    <Compile Include="Model\Draggable.cs" />
+    <Compile Include="Model\DraggableAdorner.cs" />
+    <Compile Include="Model\DragItem.xaml.cs">
+      <DependentUpon>DragItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DragItem_TextBlock.xaml.cs">
+      <DependentUpon>DragItem_TextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Dropable.cs" />
+    <Compile Include="Model\DropItem.xaml.cs">
+      <DependentUpon>DropItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Headeritem.cs" />
     <Compile Include="Model\Poketmon.cs" />
     <Compile Include="OCR\OCRManager.cs" />
     <Compile Include="PubSubEvents\CaptureAndContrastImageEvent.cs" />
@@ -219,6 +232,18 @@
     <Content Include="Images\PMIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Model\DragItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\DragItem_TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Model\DropItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\DialogStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

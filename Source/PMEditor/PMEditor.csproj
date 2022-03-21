@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\DragAndDropFileViewModel.cs" />
     <Compile Include="ViewModels\InfoSubWinodowViewModel.cs" />
     <Compile Include="ViewModels\InfoDialogViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
@@ -74,6 +75,10 @@
     <Compile Include="ViewModels\PropertyViewModel.cs" />
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
     <Compile Include="ViewModels\TTSTestViewModel.cs" />
+    <Compile Include="ViewModels\UITestViewModel.cs" />
+    <Compile Include="Views\DragAndDropFile.xaml.cs">
+      <DependentUpon>DragAndDropFile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InfoSubWinodow.xaml.cs">
       <DependentUpon>InfoSubWinodow.xaml</DependentUpon>
     </Compile>
@@ -95,6 +100,13 @@
     <Compile Include="Views\TTSTestView.xaml.cs">
       <DependentUpon>TTSTestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UITestView.xaml.cs">
+      <DependentUpon>UITestView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\DragAndDropFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ExcelInfoResultView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TTSTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UITestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -65,14 +65,14 @@
             </TextBlock>
             <Border Width="2" Background="OrangeRed" Margin="4"/>
 
-            <Button Command="{Binding CreateRectCommand}" Background="Violet"
+            <Button Command="{Binding CreateRectCommand}"
                 Width="26" Height="26" Margin="2"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 ToolTip="영역선택">
 
                 <materialDesign:PackIcon Kind="ShapeRectanglePlus" />
             </Button>
-            <Button Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView" Background="GreenYellow"
+            <Button Command="{Binding PropertyViewVisibleCommand}" CommandParameter="PropertyView" 
                 Width="26" Height="26" Margin="2"
                 Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                 ToolTip="서브윈도우 열기">
@@ -115,10 +115,10 @@
 
 
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-            <Button Background="Gray"
+            <Button 
                 Width="26" Height="26" Margin="2"
                 Click="CloseButton_Click" 
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                 ToolTip="닫기">
 
                 <materialDesign:PackIcon Kind="Close" />

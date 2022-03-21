@@ -3,7 +3,7 @@
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <ResourceDictionary.MergedDictionaries>
-        <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="Violet" />
+        <materialDesign:CustomColorTheme BaseTheme="Dark" PrimaryColor="Orange" SecondaryColor="SkyBlue" />
 
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Calendar.xaml" />
@@ -70,7 +70,7 @@
     <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MaterialDesignDatePicker}" />
     <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource MaterialDesignExpander}" />
     <Style TargetType="{x:Type GridSplitter}" BasedOn="{StaticResource MaterialDesignGridSplitter}" />
-    <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MaterialDesignGroupBox}" />
+    <!--<Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource MaterialDesignGroupBox}" />-->
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MaterialDesignLabel}" />
     <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MaterialDesignListBox}" />
     <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MaterialDesignListBoxItem}" />

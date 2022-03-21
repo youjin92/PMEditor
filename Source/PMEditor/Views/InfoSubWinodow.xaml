@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:views="clr-namespace:PMEditor.Views"
+             xmlns:models="clr-namespace:Common.Model;assembly=Common"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              prism:ViewModelLocator.AutoWireViewModel="True" Title="{Binding Title}"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -10,9 +11,9 @@
         WindowStyle="None"
         Width="800" Height="800" 
         Style="{StaticResource CustomWindowStyle}"
-        Topmost="{Binding isTopMost}">
-    
-    <Grid>
+        Topmost="{Binding isTopMost}" >
+
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="34"/>
             <RowDefinition Height="*"/>
@@ -102,6 +103,12 @@
 
             <TabControl TabStripPlacement="Left" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
 
+                <TabItem Header="{materialDesign:PackIcon Kind=PageLayoutHeader, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <TextBlock Text="1Page" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50"/>
+                    </Border>
+                </TabItem>
+
                 <TabItem Header="{materialDesign:PackIcon Kind=FileDocument, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:PropertyView />
@@ -120,12 +127,40 @@
                     </Border>
                 </TabItem>
 
-                <TabItem Header="{materialDesign:PackIcon Kind=Abc, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem Header="{materialDesign:PackIcon Kind=Voicemail, Size=24}" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:TTSTestView/>
                     </Border>
                 </TabItem>
 
+                <TabItem Header="한글" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" BorderBrush="DarkSlateGray" BorderThickness="3">
+                                <StackPanel Orientation="Horizontal">
+                                    <models:DragItem Background="Beige" Margin="20" Height="50" Foreground="Black" Width="300"/>
+                                    <models:DragItem_TextBlock Background="Beige" Margin="20" Height="50" Foreground="Black" Width="300"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Grid.Row="1" BorderBrush="Black" BorderThickness="3">
+                                <StackPanel>
+                                    <models:DropItem Background="Beige" Margin="20" Height="100" Foreground="Black"/>
+                                    <views:DragAndDropFile />
+                                </StackPanel>
+                            </Border>
+                        </Grid>   
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="UITest" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:UITestView/>
+                    </Border>
+                </TabItem>
             </TabControl>
         </Grid>
         <!-- define contents -->
