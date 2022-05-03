@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="PMEditor.Views.BehindCodeTestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+            xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+            KeyDown="UserControl_KeyDown"
+             PreviewKeyDown="UserControl_KeyDown"
+             PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Background="Bisque" KeyDown="UserControl_KeyDown"   PreviewKeyDown="UserControl_KeyDown">
+            
+    </Grid>
+</UserControl>
