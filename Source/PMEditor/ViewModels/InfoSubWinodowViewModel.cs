@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,14 @@ namespace PMEditor.ViewModels
 
         #region Field
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
+        
         #endregion
 
-        public InfoSubWinodowViewModel(IEventAggregator eventAggregator)
+        public InfoSubWinodowViewModel(IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
-
+            _regionManager = regionManager;
         }
 
         private DelegateCommand<string> _TopMostSettingCommand;
@@ -46,6 +49,15 @@ namespace PMEditor.ViewModels
                     break;
             }
 
+        }
+
+        private DelegateCommand _LoadedCommand;
+        public DelegateCommand LoadedCommand => _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(ExecuteLoadedCommand));
+        void ExecuteLoadedCommand()
+        {
+            Console.WriteLine("ExecuteLoadedCommand");
+
+            _regionManager.RequestNavigate("SelectRegion", "Problem1");
         }
     }
 }

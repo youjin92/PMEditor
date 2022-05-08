@@ -4,12 +4,9 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-            KeyDown="UserControl_KeyDown"
-             PreviewKeyDown="UserControl_KeyDown"
-             PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+            prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Background="Bisque" KeyDown="UserControl_KeyDown"   PreviewKeyDown="UserControl_KeyDown">
-            
+    <Grid Background="Bisque">
+        <Button Command="{Binding ClickCommand}"></Button>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Capture;
+using Common.IService;
 using PMEditor.ViewModels;
 using Prism.Events;
 using Prism.Regions;
@@ -22,7 +23,7 @@ namespace PMEditor.Views
         IRegionManager _regionManager;
         IDialogService _dialogService;
 
-        public MainWindow(IEventAggregator eventAggregator, IRegionManager regionManager, IDialogService dialogService)
+        public MainWindow(IEventAggregator eventAggregator, IRegionManager regionManager, IDialogService dialogService,  ISolutionManager _SolutionManager)
         {
             InitializeComponent();
             _eventAggregator = eventAggregator;
@@ -31,7 +32,7 @@ namespace PMEditor.Views
 
             System.IO.Directory.CreateDirectory(FileManager.DBPath);
 
-            var vm = new MainWindowViewModel(this.rootgrid, _eventAggregator, _regionManager, _dialogService);
+            var vm = new MainWindowViewModel(this.rootgrid, _eventAggregator, _regionManager, _dialogService, _SolutionManager);
             this.DataContext = vm;
         }
 

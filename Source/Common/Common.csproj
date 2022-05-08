@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Excel\ExcelManager.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="IService\ISolutionManager.cs" />
     <Compile Include="Markups\CommonImageSourceExtension.cs" />
     <Compile Include="Markups\EnumBindingSourceExtension.cs" />
     <Compile Include="Model\Draggable.cs" />
@@ -144,6 +145,8 @@
     </Compile>
     <Compile Include="Model\Headeritem.cs" />
     <Compile Include="Model\Poketmon.cs" />
+    <Compile Include="Model\Solution.cs" />
+    <Compile Include="Module\SolutionManager.cs" />
     <Compile Include="OCR\OCRManager.cs" />
     <Compile Include="PubSubEvents\CaptureAndContrastImageEvent.cs" />
     <Compile Include="PubSubEvents\infoEndworkEvent.cs" />
@@ -227,10 +230,16 @@
     <Content Include="Images\capture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\climb.png" />
     <Content Include="Images\contract.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\escape.png" />
+    <Resource Include="Images\music.png" />
+    <Resource Include="Images\paint.png" />
     <Content Include="Images\PMIcon.ico" />
+    <Resource Include="Images\ski.png" />
+    <Resource Include="Images\sponge.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Model\DragItem.xaml">

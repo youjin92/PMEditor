@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="PMEditor.Views.SelectYesNoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"          
+             prism:ViewModelLocator.AutoWireViewModel="True" >
+    <Grid>
+        <StackPanel>
+            <Button Content="Test" Command="{Binding TestCommand}"></Button>
+            <ContentControl prism:RegionManager.RegionName="SelectRegion"/>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
