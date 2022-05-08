@@ -67,6 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BehindCodeTestViewModel.cs" />
     <Compile Include="ViewModels\DragAndDropFileViewModel.cs" />
     <Compile Include="ViewModels\InfoSubWinodowViewModel.cs" />
     <Compile Include="ViewModels\InfoDialogViewModel.cs" />
@@ -76,6 +77,9 @@
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
     <Compile Include="ViewModels\TTSTestViewModel.cs" />
     <Compile Include="ViewModels\UITestViewModel.cs" />
+    <Compile Include="Views\BehindCodeTestView.xaml.cs">
+      <DependentUpon>BehindCodeTestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DragAndDropFile.xaml.cs">
       <DependentUpon>DragAndDropFile.xaml</DependentUpon>
     </Compile>
@@ -103,6 +107,10 @@
     <Compile Include="Views\UITestView.xaml.cs">
       <DependentUpon>UITestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\BehindCodeTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DragAndDropFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

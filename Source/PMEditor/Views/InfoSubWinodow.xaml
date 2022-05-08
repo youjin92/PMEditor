@@ -11,6 +11,7 @@
         WindowStyle="None"
         Width="800" Height="800" 
         Style="{StaticResource CustomWindowStyle}"
+        KeyDown="Window_KeyDown"
         Topmost="{Binding isTopMost}" >
 
     <Grid >
@@ -159,6 +160,12 @@
                 <TabItem Header="UITest" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:UITestView/>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="SAMPLETEST" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:BehindCodeTestView/>
                     </Border>
                 </TabItem>
             </TabControl>

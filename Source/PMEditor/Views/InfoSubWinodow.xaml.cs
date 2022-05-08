@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace PMEditor.Views
 {
@@ -32,6 +33,14 @@ namespace PMEditor.Views
         private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.KeyboardDevice.IsKeyDown(Key.LeftShift) && e.KeyboardDevice.IsKeyDown(Key.LeftCtrl))
+            {
+                System.Console.WriteLine("UserControl_KeyDown_Shift_Control_Clicked");
+            }
         }
     }
 }

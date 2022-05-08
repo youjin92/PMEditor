@@ -3,8 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"       
              xmlns:models="clr-namespace:Common.Model;assembly=Common"
+             xmlns:uc ="clr-namespace:Common.UserControls;assembly=Common"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        <models:Headeritem Opacity="1"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <models:Headeritem Grid.Row="0" Opacity="1"/>
+        <RichTextBox Grid.Row="1" Name="richTB" Background="AliceBlue" Foreground="Black">
+            <FlowDocument>
+                <Paragraph>
+                    <Run FontWeight="Bold">Your Name:</Run>
+                    <Run Text="{Binding NameProperty}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox Text="{Binding TextBoxText, UpdateSourceTrigger=PropertyChanged}" MinWidth="100" Height="50" 
+                     Background="Beige" Foreground="Black" FontWeight="Bold"></TextBox>
+            <Button Command="{Binding ChangeTextCommand}" Content="TextChange"/>
+        </StackPanel>
+        <uc:AdditionalFeaturesTextBox Grid.Row="3" Text="{Binding TextBoxText, UpdateSourceTrigger=PropertyChanged}" IsUsingOption="True"  Background="gray"></uc:AdditionalFeaturesTextBox>
     </Grid>
 </UserControl>
