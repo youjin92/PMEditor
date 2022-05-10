@@ -51,19 +51,12 @@ namespace PMEditor.ViewModels
         public Visibility IsProblemEndingBorderVisibility { get; set; } = Visibility.Collapsed;
         public HorizontalAlignment TextBlockHorizontal { get; set; } = HorizontalAlignment.Left;
         public VerticalAlignment TextBlockVertical { get; set; } = VerticalAlignment.Top;
-        public string ResultText {
-            get => _ResultText;
-            set
-            {
-                _ResultText = value;
-            } 
-        } 
+        public string ResultText { get; set; } = "Error";
         public bool IsOcrThreadChecked { get; set; }
         public ISolutionManager SolutionManager { get; set; }
         #endregion
 
         #region 필드
-        string _ResultText = "Error";
         Grid rootgrid;
         Point startPosition;
         Point endPosition;
@@ -286,23 +279,44 @@ namespace PMEditor.ViewModels
 
             string ocredText = OCRManager.OCR($"{FileManager.ImageRootPath}\\contract.png");
             ResultText = ocredText;
-
-
+            
             if (ResultText.Contains("도전"))
             {
-                IsProblemEndingBorderVisibility = Visibility.Visible;
+                
+                ZeroAsync();
+                ZeroAsync_1();
+
                 FirstAsync();
+
                 SecondAsync();
+
+    
             }
+        }
+
+        private async void ZeroAsync()
+        {
+            await Task.Run(() =>
+            {
+                ResultText = "도전";
+            });
+        }
+
+        private async void ZeroAsync_1()
+        {
+            await Task.Run(() =>
+            {
+                Thread.Sleep(2000);
+                IsProblemEndingBorderVisibility = Visibility.Visible;
+            });
         }
 
         private async void FirstAsync()
         {
             await Task.Run(() =>
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(4000);
                 FirstLineText = "암호해독 완료";
-                Thread.Sleep(2000);
             });
         }
 
@@ -310,14 +324,10 @@ namespace PMEditor.ViewModels
         {
             await Task.Run(() =>
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(7000);
                 SecondLineText = "바이러스 제거";
-                Thread.Sleep(3000);
             });
         }
-
-
-
         #endregion
 
         #region 사각형 (Rectangle / OCRRect 생성)
