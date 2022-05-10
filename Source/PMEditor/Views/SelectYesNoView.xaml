@@ -5,8 +5,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True" >
     <Grid>
         <StackPanel>
-            <Button Content="Test" Command="{Binding TestCommand}"></Button>
-            <ContentControl prism:RegionManager.RegionName="SelectRegion"/>
         </StackPanel>
         
     </Grid>

@@ -19,7 +19,6 @@ namespace PMEditor.ViewModels
         public DelegateCommand TestCommand =>_TestCommand ?? (_TestCommand = new DelegateCommand(ExecuteTestCommand));
         void ExecuteTestCommand()
         {
-            _regionManager.RequestNavigate("SelectRegion", "Problem1");
         }
     }
 }

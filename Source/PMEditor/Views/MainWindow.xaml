@@ -77,7 +77,7 @@
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers >
-                                <DataTrigger Binding="{Binding SolutionManager.Solution.IsEventFire}" Value="True">
+                                <DataTrigger Binding="{Binding SolutionManager.Solution.IsEventFire}" Value="true">
                                     <Setter Property="Foreground" Value="Red"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -85,6 +85,12 @@
                     </TextBlock.Style>
                 </TextBlock>
                 <TextBlock Text="집근처" FontSize="30" FontWeight="Bold" Margin="10,0,10,0"/>
+                <Button  Command="{Binding TestCommand}"
+                Width="26" Height="26" Margin="2"
+                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                ToolTip="결과입력">
+                    <materialDesign:PackIcon Kind="ShapeRectanglePlus" />
+                </Button>
             </StackPanel>
             
             <TextBlock Grid.Row="3" Text="힌트 : 테블릿의 문제를 맞추면 정답 코드가 보입니다." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
@@ -171,10 +177,19 @@
 
         </StackPanel>
 
-        <ContentControl prism:RegionManager.RegionName="SelectRegion"/>
-
         <Border x:Name="bgBorder" 
                 Width="{Binding ElementName=rootwindow, Path=ActualWidth}" Height="{Binding ElementName=rootwindow, Path=ActualHeight}"
                 Visibility="{Binding IsBorderVisible}" Background="Orange" Opacity="0.2"/>
+
+        <Border Background="SkyBlue" Visibility="{Binding IsProblemEndingBorderVisibility}">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="{Binding FirstLineText}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="60" FontWeight="Bold"/>
+                <TextBlock Text="{Binding SecondLineText}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="60" FontWeight="Bold"/>
+            </StackPanel >
+        </Border>
     </Grid>
 </Window>
+
+    

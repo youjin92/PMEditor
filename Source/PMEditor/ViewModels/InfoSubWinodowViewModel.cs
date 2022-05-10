@@ -51,13 +51,10 @@ namespace PMEditor.ViewModels
 
         }
 
-        private DelegateCommand _LoadedCommand;
-        public DelegateCommand LoadedCommand => _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(ExecuteLoadedCommand));
-        void ExecuteLoadedCommand()
+        private DelegateCommand<object> _LoadedCommand;
+        public DelegateCommand<object> LoadedCommand => _LoadedCommand ?? (_LoadedCommand = new DelegateCommand<object>(ExecuteLoadedCommand));
+        void ExecuteLoadedCommand(object parameter)
         {
-            Console.WriteLine("ExecuteLoadedCommand");
-
-            _regionManager.RequestNavigate("SelectRegion", "Problem1");
         }
     }
 }

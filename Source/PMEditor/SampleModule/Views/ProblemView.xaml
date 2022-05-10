@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="PMEditor.SampleModule.Views.ProblemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:markup="clr-namespace:Common.Markups;assembly=Common"
+             xmlns:usercontrols="clr-namespace:Common.UserControls;assembly=Common"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             x:Name="main"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="image" Grid.Row="0" Stretch="Uniform"/>
+        <Border Opacity="0.3" Background="Orange" Visibility="{Binding AnswerBorderVisibility}">
+            <TextBlock Text="정답" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="100" FontWeight="Bold"/>
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="200"/>
+                    <Setter Property="Width" Value="300"/>
+                    <Setter Property="FontSize" Value="50"/>
+                    <Setter Property="Margin" Value="10"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button x:Name="Button1" Content="1" Command="{Binding ClickCommand}" CommandParameter="{Binding RelativeSource={RelativeSource self}, Path=Content}"/>
+            <Button x:Name="Button2" Content="2" Command="{Binding ClickCommand}" CommandParameter="{Binding RelativeSource={RelativeSource self}, Path=Content}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
