@@ -24,20 +24,17 @@ using PMEditor.Views;
 using Prism.Regions;
 using Common.OCR;
 using Prism.Services.Dialogs;
-using Common.IService;
 
 namespace PMEditor.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public MainWindowViewModel(Grid grid , IEventAggregator eventAggregator, IRegionManager regionManager, IDialogService dialogService, ISolutionManager _SolutionManager)
+        public MainWindowViewModel(Grid grid , IEventAggregator eventAggregator, IRegionManager regionManager, IDialogService dialogService)
         {
             rootgrid = grid;
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             _dialogService = dialogService;
-
-            SolutionManager = _SolutionManager;
 
             _eventAggregator.GetEvent<CaptureAndContrastImageEvent>().Subscribe(SaveCaptureImageAndContrastImageFromEvent);
         }
@@ -49,7 +46,6 @@ namespace PMEditor.ViewModels
         public VerticalAlignment TextBlockVertical { get; set; } = VerticalAlignment.Top;
         public string ResultText { get; set; } = "PMEditor";
         public bool IsOcrThreadChecked { get; set; }
-        public ISolutionManager SolutionManager;
         #endregion
 
         #region 필드

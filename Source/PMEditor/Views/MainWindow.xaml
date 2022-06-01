@@ -11,7 +11,7 @@
         WindowState="Maximized"
         WindowStyle="None"
         x:Name="rootwindow"
-        Topmost="False">
+        Topmost="True">
     
     <Window.InputBindings>
         <KeyBinding Key="A" Modifiers="Alt" Command="{Binding CreateRectCommand}" />
@@ -45,50 +45,6 @@
                 <prism:InvokeCommandAction Command="{Binding ClosedCommand}"/>
             </i:EventTrigger>-->
         </i:Interaction.Triggers>
-
-        <Grid Background="White">
-            <Grid.RowDefinitions >
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="0.5*"/>
-            </Grid.RowDefinitions >
-            <TextBlock Text="바이러스 암호 해제" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="회사를 다니면서 가장 중요한 것은 " FontSize="30" FontWeight="Bold"/>
-                <Border BorderThickness="2" BorderBrush="Black">
-                    <TextBlock Text="{Binding ResultText}" FontSize="30" FontWeight="Bold" MinWidth="100" Height="50" TextAlignment="Center" />
-                </Border>
-                <TextBlock Text=" 이다" FontSize="30" FontWeight="Bold"/>
-            </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Button  Command="{Binding CreateRectCommand}"
-                Width="26" Height="26" Margin="2"
-                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                ToolTip="영역선택">
-                    <materialDesign:PackIcon Kind="ShapeRectanglePlus" />
-                </Button>
-                <TextBlock Text="피자" FontSize="30" FontWeight="Bold" Margin="10,0,10,0"/>
-                <TextBlock Text="돈" FontSize="30" FontWeight="Bold" Margin="10,0,10,0"/>
-                <TextBlock Text="흥미" FontSize="30"  FontWeight="Bold" Margin="10,0,10,0"/>
-                <TextBlock Text="열정" FontSize="30"  FontWeight="Bold" Margin="10,0,10,0"/>
-                <TextBlock Text="잠" FontSize="30" FontWeight="Bold" Margin="10,0,10,0"/>
-                <TextBlock Text="도전" FontSize="30" FontWeight="Bold" Margin="10,0,10,0">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers >
-                                <DataTrigger Binding="{Binding SolutionManager.Solution.IsEventFire}" Value="True">
-                                    <Setter Property="Foreground" Value="Red"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-                <TextBlock Text="집근처" FontSize="30" FontWeight="Bold" Margin="10,0,10,0"/>
-            </StackPanel>
-            
-            <TextBlock Grid.Row="3" Text="힌트 : 테블릿의 문제를 맞추면 정답 코드가 보입니다." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-        </Grid>
 
         <StackPanel Height="40" Margin="50" Orientation="Horizontal" Background="Orange"
                     VerticalAlignment="{Binding TextBlockVertical}" HorizontalAlignment="{Binding TextBlockHorizontal}">
@@ -124,7 +80,7 @@
                 <materialDesign:PackIcon Kind="Monitor" />
             </Button>
             <Border Width="2" Background="OrangeRed" Margin="4"/>
-
+  
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" Height="26">
                 <TextBlock Text="OCR모드 : " HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" FontWeight="Bold"/>
@@ -157,6 +113,7 @@
                 <TextBlock Text=" On" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
             </StackPanel>
 
+
             <Border Width="2" Background="OrangeRed" Margin="4"/>
             <Button 
                 Width="26" Height="26" Margin="2"
@@ -170,8 +127,6 @@
             <Border Width="1" Background="Orange" Margin="4"/>
 
         </StackPanel>
-
-        <ContentControl prism:RegionManager.RegionName="SelectRegion"/>
 
         <Border x:Name="bgBorder" 
                 Width="{Binding ElementName=rootwindow, Path=ActualWidth}" Height="{Binding ElementName=rootwindow, Path=ActualHeight}"

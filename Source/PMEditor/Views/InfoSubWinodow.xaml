@@ -12,14 +12,7 @@
         Width="800" Height="800" 
         Style="{StaticResource CustomWindowStyle}"
         KeyDown="Window_KeyDown"
-        Topmost="{Binding isTopMost}" 
-        >
-    
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <prism:InvokeCommandAction Command="{Binding LoadedCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+        Topmost="{Binding isTopMost}" >
 
     <Grid >
         <Grid.RowDefinitions>
@@ -173,12 +166,6 @@
                 <TabItem Header="SAMPLETEST" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:BehindCodeTestView/>
-                    </Border>
-                </TabItem>
-
-                <TabItem Header="Solve" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <views:SelectYesNoView />
                     </Border>
                 </TabItem>
             </TabControl>

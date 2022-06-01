@@ -12,13 +12,5 @@ namespace PMEditor.ViewModels
         {
 
         }
-
-        private DelegateCommand _ClickCommand;
-        public DelegateCommand ClickCommand =>
-            _ClickCommand ?? (_ClickCommand = new DelegateCommand(ExecuteClickCommand));
-        void ExecuteClickCommand()
-        {
-            Console.WriteLine("ExecuteClickCommand");
-        }
     }
 }

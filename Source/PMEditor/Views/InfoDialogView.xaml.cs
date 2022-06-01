@@ -11,7 +11,5 @@ namespace PMEditor.Views
         {
             InitializeComponent();
         }
-
-        
     }
 }

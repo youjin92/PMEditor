@@ -1,8 +1,5 @@
 ﻿using Common;
 using Common.Excel;
-using Common.IService;
-using Common.Module;
-using PMEditor.SampleModule.Views;
 using PMEditor.ViewModels;
 using PMEditor.Views;
 using Prism.Ioc;
@@ -36,14 +33,11 @@ namespace PMEditor
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ISolutionManager, SolutionManager>();
-
             containerRegistry.RegisterForNavigation<PropertyView>();
             containerRegistry.RegisterForNavigation<ExcelInfoResultView>();
             containerRegistry.RegisterForNavigation<LoadingView>();
-            containerRegistry.RegisterForNavigation<Problem1>();
-
             containerRegistry.RegisterDialog<InfoDialogView>();
+
         }
 
         protected override void OnInitialized()
@@ -55,7 +49,8 @@ namespace PMEditor
             _regionManager.RequestNavigate("LoadingViewRegion", "LoadingView");
             _regionManager.RequestNavigate("PropertyViewRegion", "PropertyView");
             _regionManager.RequestNavigate("ExcelInfoResultViewRegion", "ExcelInfoResultView");
-            _regionManager.RequestNavigate("SelectRegion", "Problem1");
+
+            
         }
 
         protected override void Initialize()

@@ -15,7 +15,7 @@ namespace Common.Capture
     {
         public static int FullScreenWidth = Screen.PrimaryScreen.WorkingArea.Width; //작업영역 가로크기
         public static int FullScreenHeight = Screen.PrimaryScreen.WorkingArea.Height; // 작업영역 세로크기
-        public static int Cutoff = 170;
+        public static int Cutoff = 175;
 
         public static void FullScreenCaptureAndSave(string filename)
         {
