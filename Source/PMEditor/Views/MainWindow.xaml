@@ -93,7 +93,7 @@
                 </Button>
             </StackPanel>
             
-            <TextBlock Grid.Row="3" Text="힌트 : 테블릿의 그림을 보고 유진이의 취미를 고르시오. 문제를 맞추면 정답 코드가 보입니다." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
+            <TextBlock Grid.Row="3" Text="힌트 : 테블릿의 문제를 맞추면 정답 코드가 보입니다." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="Bold"/>
         </Grid>
 
         <StackPanel Height="40" Margin="50" Orientation="Horizontal" Background="Orange"
