@@ -41,6 +41,8 @@ namespace PMEditor
             containerRegistry.RegisterForNavigation<PropertyView>();
             containerRegistry.RegisterForNavigation<ExcelInfoResultView>();
             containerRegistry.RegisterForNavigation<LoadingView>();
+            containerRegistry.RegisterForNavigation<Problem1>();
+
             containerRegistry.RegisterDialog<InfoDialogView>();
         }
 
@@ -53,6 +55,7 @@ namespace PMEditor
             _regionManager.RequestNavigate("LoadingViewRegion", "LoadingView");
             _regionManager.RequestNavigate("PropertyViewRegion", "PropertyView");
             _regionManager.RequestNavigate("ExcelInfoResultViewRegion", "ExcelInfoResultView");
+            _regionManager.RequestNavigate("SelectRegion", "Problem1");
         }
 
         protected override void Initialize()

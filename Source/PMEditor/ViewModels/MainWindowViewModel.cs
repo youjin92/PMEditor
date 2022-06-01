@@ -25,7 +25,6 @@ using Prism.Regions;
 using Common.OCR;
 using Prism.Services.Dialogs;
 using Common.IService;
-using System.Threading.Tasks;
 
 namespace PMEditor.ViewModels
 {
@@ -45,25 +44,15 @@ namespace PMEditor.ViewModels
 
         #region 프로퍼티
         public string Title { get; set; } = "PMEditor";
-        public string FirstLineText { get; set; } = "암호 해독중입니다...";
-        public string SecondLineText { get; set; } = "";
         public Visibility IsBorderVisible { get; set; } = Visibility.Collapsed;
-        public Visibility IsProblemEndingBorderVisibility { get; set; } = Visibility.Collapsed;
         public HorizontalAlignment TextBlockHorizontal { get; set; } = HorizontalAlignment.Left;
         public VerticalAlignment TextBlockVertical { get; set; } = VerticalAlignment.Top;
-        public string ResultText {
-            get => _ResultText;
-            set
-            {
-                _ResultText = value;
-            } 
-        } 
+        public string ResultText { get; set; } = "PMEditor";
         public bool IsOcrThreadChecked { get; set; }
-        public ISolutionManager SolutionManager { get; set; }
+        public ISolutionManager SolutionManager;
         #endregion
 
         #region 필드
-        string _ResultText = "Error";
         Grid rootgrid;
         Point startPosition;
         Point endPosition;
@@ -282,41 +271,8 @@ namespace PMEditor.ViewModels
         public DelegateCommand TestCommand =>_TestCommand ?? (_TestCommand = new DelegateCommand(ExecuteTestCommand));
         void ExecuteTestCommand()
         {
-            SaveCaptureImageAndContrastImage();
 
-            string ocredText = OCRManager.OCR($"{FileManager.ImageRootPath}\\contract.png");
-            ResultText = ocredText;
-
-
-            if (ResultText.Contains("도전"))
-            {
-                IsProblemEndingBorderVisibility = Visibility.Visible;
-                FirstAsync();
-                SecondAsync();
-            }
         }
-
-        private async void FirstAsync()
-        {
-            await Task.Run(() =>
-            {
-                Thread.Sleep(2000);
-                FirstLineText = "암호해독 완료";
-                Thread.Sleep(2000);
-            });
-        }
-
-        private async void SecondAsync()
-        {
-            await Task.Run(() =>
-            {
-                Thread.Sleep(5000);
-                SecondLineText = "바이러스 제거";
-                Thread.Sleep(3000);
-            });
-        }
-
-
 
         #endregion
 

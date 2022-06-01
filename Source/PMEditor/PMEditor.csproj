@@ -67,8 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SampleModule\Views\ProblemView.xaml.cs">
-      <DependentUpon>ProblemView.xaml</DependentUpon>
+    <Compile Include="SampleModule\Views\Problem1.xaml.cs">
+      <DependentUpon>Problem1.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BehindCodeTestViewModel.cs" />
     <Compile Include="ViewModels\DragAndDropFileViewModel.cs" />
@@ -76,7 +76,7 @@
     <Compile Include="ViewModels\InfoDialogViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\LoadingWindowViewModel.cs" />
-    <Compile Include="SampleModule\ViewModels\ProblemViewModel.cs" />
+    <Compile Include="SampleModule\ViewModels\Problem1ViewModel.cs" />
     <Compile Include="ViewModels\PropertyViewModel.cs" />
     <Compile Include="ViewModels\SelectYesNoViewModel.cs" />
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Views\UITestView.xaml.cs">
       <DependentUpon>UITestView.xaml</DependentUpon>
     </Compile>
-    <Page Include="SampleModule\Views\ProblemView.xaml">
+    <Page Include="SampleModule\Views\Problem1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

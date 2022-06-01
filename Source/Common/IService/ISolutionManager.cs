@@ -10,6 +10,5 @@ namespace Common.IService
     public interface ISolutionManager
     {
         Solution Solution { get; set; }
-
     }
 }

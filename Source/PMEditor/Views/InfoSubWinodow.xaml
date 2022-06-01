@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:views="clr-namespace:PMEditor.Views"
-             xmlns:SampleModule="clr-namespace:PMEditor.SampleModule.Views"
              xmlns:models="clr-namespace:Common.Model;assembly=Common"
-             xmlns:markup="clr-namespace:Common.Markups;assembly=Common"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              prism:ViewModelLocator.AutoWireViewModel="True" Title="{Binding Title}"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -113,7 +111,7 @@
 
             <TabControl TabStripPlacement="Left" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
 
-                <!--<TabItem Header="{materialDesign:PackIcon Kind=PageLayoutHeader, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem Header="{materialDesign:PackIcon Kind=PageLayoutHeader, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <TextBlock Text="1Page" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50"/>
                     </Border>
@@ -176,59 +174,11 @@
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:BehindCodeTestView/>
                     </Border>
-                </TabItem>-->
-
-                <TabItem Header="{materialDesign:PackIcon Kind=PageFirst, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}" Width="200" Height="150">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=climb.png}" 
-                                                  Button1Content="등산" Button2Content="먹방"
-                                                  Answer="등산"
-                                                  Order="1"/>
-                    </Border>
                 </TabItem>
 
-                <TabItem Header="{materialDesign:PackIcon Kind=PageLayoutHeader, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}"  Width="200" Height="150">
+                <TabItem Header="Solve" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=escape.png}" 
-                                                  Button1Content="방탈출" Button2Content="술"
-                                                  Answer="방탈출"
-                                                  Order="2"/>
-                    </Border>
-                </TabItem>
-
-                <TabItem Header="{materialDesign:PackIcon Kind=PageLayoutMarginals, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}"  Width="200" Height="150">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=music.png}" 
-                                                  Button1Content="혼자놀기" Button2Content="뮤지컬"
-                                                  Answer="뮤지컬"
-                                                  Order="3"/>
-                    </Border>
-                </TabItem>
-
-                <TabItem Header="{materialDesign:PackIcon Kind=PackageDown, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}"  Width="200" Height="150">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=paint.png}" 
-                                                  Button1Content="그림" Button2Content="낙서"
-                                                  Answer="그림"
-                                                  Order="4"/>
-                    </Border>
-                </TabItem>
-
-                <TabItem Header="{materialDesign:PackIcon Kind=PackageOff, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}"  Width="200" Height="150">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=ski.png}" 
-                                                  Button1Content="스키" Button2Content="조립"
-                                                  Answer="스키"
-                                                  Order="5"/>
-                    </Border>
-                </TabItem>
-
-                <TabItem Header="{materialDesign:PackIcon Kind=PageLast, Size=50}" Style="{StaticResource MaterialDesignNavigationRailTabItem}"  Width="200" Height="150">
-                    <Border BorderBrush="#FF9800" BorderThickness="5">
-                        <SampleModule:ProblemView ImageSourceEX="{markup:CommonImageSource FileName=sponge.png}" 
-                                                  Button1Content="3D팬" Button2Content="커피"
-                                                  Answer="3D팬"
-                                                  Order="6"/>
+                        <views:SelectYesNoView />
                     </Border>
                 </TabItem>
             </TabControl>
