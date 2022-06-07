@@ -17,6 +17,10 @@
             <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
 
+            <Button Command="{Binding TestCommand}" CommandParameter="ReadAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="WriteAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="PingTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+
             <TreeView ItemsSource="{Binding TreeViewList}" MinWidth="220" >
                 <TreeView.Resources>
                     <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">

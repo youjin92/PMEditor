@@ -37,6 +37,11 @@ namespace PMEditor.ViewModels
         public DelegateCommand<string> TestCommand => _TestCommand ?? (_TestCommand = new DelegateCommand<string>(ExecuteTestCommand));
         void ExecuteTestCommand(string param)
         {
+            string originPath = @"D:\KakaoTalk_20181103_204644132.jpg";
+            string targetPath = @"D:\KakaoTalk_20181103_2046441323333.jpg";
+
+            byte[] Buffer = new byte[1024];
+
             string path = @"C:\Folder1\Folder2\Folder3\Folder4\";
             string folderName = "Test.txt";
             string newPath = "";
@@ -59,6 +64,13 @@ namespace PMEditor.ViewModels
                     var test = FileHelper.GetFileDirPath(@"C:\Users\jyou_estsecurity\Documents\repos\MaterialDesignInXamlToolkit-master (1).zip");
                     var Newtest = Path.GetFullPath(Path.Combine(test, @"Best.txt"));
 
+                    break;
+
+                case "ReadAllBytes":
+                    Buffer = File.ReadAllBytes(originPath);
+                    break;
+                case "WriteAllBytes":
+                    File.WriteAllBytes(targetPath, Buffer);
                     break;
                 default:
                     break;
