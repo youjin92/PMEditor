@@ -7,9 +7,29 @@
             KeyDown="UserControl_KeyDown"
              PreviewKeyDown="UserControl_KeyDown"
              PreviewMouseDoubleClick="UserControl_PreviewMouseDoubleClick"
+            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:viewmodels="clr-namespace:PMEditor.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid Background="Bisque" KeyDown="UserControl_KeyDown"   PreviewKeyDown="UserControl_KeyDown">
-            
+    <Grid Background="Navy" KeyDown="UserControl_KeyDown"   PreviewKeyDown="UserControl_KeyDown">
+        <StackPanel Orientation="Vertical">
+            <Button Command="{Binding TestCommand}" CommandParameter="PreviewPath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+
+            <TreeView ItemsSource="{Binding TreeViewList}" MinWidth="220" >
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                    </Style>
+                    <HierarchicalDataTemplate DataType="{x:Type viewmodels:Persons}" ItemsSource="{Binding Children}">
+                        <TextBlock Text="{Binding Name}" Margin="3,2" ToolTip="Toolip"/>
+                    </HierarchicalDataTemplate>
+                    <!--<DataTemplate DataType="{x:Type viewmodels:Persons}">
+                        <TextBlock Text="{Binding Name}" Margin="32" ToolTip="Toolip" />
+                    </DataTemplate>-->
+                </TreeView.Resources>
+            </TreeView>
+
+        </StackPanel>
     </Grid>
 </UserControl>
