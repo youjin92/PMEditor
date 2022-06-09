@@ -25,5 +25,10 @@ namespace PMEditor.Views
         {
 
         }
+
+        private void TreeView_Expanded(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
