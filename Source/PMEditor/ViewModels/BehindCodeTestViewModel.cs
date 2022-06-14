@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Newtonsoft.Json;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace PMEditor.ViewModels
 {
@@ -114,11 +116,21 @@ namespace PMEditor.ViewModels
 
                     var Text1 = getIni("Test_Info", "Test", "", strCheckFolder + "\\INI\\Test.ini");
                     break;
+                case "JsonConvert":
+                    JsonTest jsonTest = new JsonTest() { Age = 1, Name = "test", Test = new PersonB() { Name = "유진", Age = 31 } };
+
+                    string jsonTxt = JsonConvert.SerializeObject(jsonTest);
+
+                    JsonTest jsonTest1 = JsonConvert.DeserializeObject<JsonTest>(jsonTxt);
+
+                    PersonB a = JsonConvert.DeserializeObject<PersonB>(JsonConvert.SerializeObject(jsonTest1.Test));
+
+                    break;
                 default:
                     break;
             }
 
-
+            
         }
 
         #region 함수
@@ -209,6 +221,31 @@ namespace PMEditor.ViewModels
         {
             Console.WriteLine("ExecuteExpandedCommand");
         }
+
+        private DelegateCommand<object> _KeyDownCommand;
+        public DelegateCommand<object> KeyDownCommand => _KeyDownCommand ?? (_KeyDownCommand = new DelegateCommand<object>(ExecuteKeyDownCommand));
+        void ExecuteKeyDownCommand(object parameter)
+        {
+            var args = parameter as System.Windows.Input.KeyEventArgs;
+
+            if (args.Key == Key.Oem5)       //\
+            { }
+       
+
+        }
+    }
+    public class JsonTest : BindableBase
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public object Test { get; set; }
+
+    }
+
+    public class PersonB : BindableBase
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
 
     public class Persons : BindableBase

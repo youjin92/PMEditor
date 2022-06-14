@@ -23,6 +23,7 @@
             <Button Command="{Binding TestCommand}" CommandParameter="INI만들기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="INI쓰기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="INI읽기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="JsonConvert" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
 
             <TreeView ItemsSource="{Binding TreeViewList}" MinWidth="220" TreeViewItem.Expanded="TreeView_Expanded">
                 <i:Interaction.Triggers>
@@ -41,7 +42,13 @@
                     </DataTemplate>-->
                 </TreeView.Resources>
             </TreeView>
-
+            <TextBox>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyDown">
+                        <prism:InvokeCommandAction Command="{Binding KeyDownCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
         </StackPanel>
     </Grid>
 </UserControl>
