@@ -4,12 +4,16 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace PMEditor.ViewModels
 {
@@ -126,12 +130,37 @@ namespace PMEditor.ViewModels
                     PersonB a = JsonConvert.DeserializeObject<PersonB>(JsonConvert.SerializeObject(jsonTest1.Test));
 
                     break;
+                case "FileImage추출":
+                    string path22 = @"D:\속도테스트2 - 복사본 (2).txt";
+                    Icon icn = Icon.ExtractAssociatedIcon(path22);
+                    img = Image.FromHbitmap(icn.ToBitmap().GetHbitmap());
+
+                    break;
+                case "FileImage설정":
+                    using (var memory = new MemoryStream())
+                    {
+                        img.Save(memory, ImageFormat.Png);
+                        memory.Position = 0;
+
+                        var bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.StreamSource = memory;
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.EndInit();
+
+                        btmImage= bitmapImage;
+                    }
+
+                    ImageSource = btmImage;
+
+                    break;
                 default:
                     break;
             }
-
-            
         }
+        Image img;
+        BitmapImage btmImage;
+        public ImageSource ImageSource { get; set; }
 
         #region 함수
         //INIFile 만들기...

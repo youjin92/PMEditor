@@ -110,7 +110,7 @@
                     </Border>
                 </TabItem>
 
-                <TabItem Header="{materialDesign:PackIcon Kind=FileDocument, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem Header="{materialDesign:PackIcon Kind=FileCabinet, Size=24}"  Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:PropertyView />
                     </Border>

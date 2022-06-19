@@ -24,6 +24,9 @@
             <Button Command="{Binding TestCommand}" CommandParameter="INI쓰기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="INI읽기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="JsonConvert" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="FileImage추출" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="FileImage설정" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+            <Image Source="{Binding ImageSource}" Stretch="Fill"/>
 
             <TreeView ItemsSource="{Binding TreeViewList}" MinWidth="220" TreeViewItem.Expanded="TreeView_Expanded">
                 <i:Interaction.Triggers>
