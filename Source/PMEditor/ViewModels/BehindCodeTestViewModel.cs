@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Common.Model;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -8,8 +9,13 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -154,9 +160,451 @@ namespace PMEditor.ViewModels
                     ImageSource = btmImage;
 
                     break;
+
+                case "ByteTest":
+                    {
+                        ObservableCollection<byte[]> bytesCollection = new ObservableCollection<byte[]>();
+                        bytesCollection.Add(new byte[] {});
+                        bytesCollection[0] = new byte[] { 1, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+                        bytesCollection[1] = new byte[] { 2, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+                        bytesCollection[2] = new byte[] { 3, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+
+                        //List<byte[]> bytesCollection = new List<byte[]>();
+                        //bytesCollection[0] = new byte[] { 1, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+                        //bytesCollection[1] = new byte[] { 2, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+                        //bytesCollection[2] = new byte[] { 3, 2, 3, 4, 5, 1, 12, 98, 3, 4, };
+
+                        Console.WriteLine(bytesCollection);
+                        foreach (var item in bytesCollection)
+                        {
+                            Console.WriteLine(item);
+                        }
+                        break;
+                    }
+
+                case "FileTest":
+                    {
+                        //DownloadManager DownloadManager = new DownloadManager();
+
+                        //string TargetFilePath = @"C:\새 폴더\3gb.zip";
+
+                        //FileStream fileStr = new FileStream(TargetFilePath, FileMode.Open, FileAccess.Read);
+
+                        //long fileLength = fileStr.Length;
+
+                        //long count = fileLength / 1024 + 1;
+
+                        //long remain = fileLength % 1024;
+
+                        //byte[] buffer = new byte[1024];
+
+                        //int BlockIndex = 0;
+                        //int BytesIndex = 0;
+
+                        //long BlockSize = 1024 * 1024 * 1024;
+                        //long TotalReadByte = 0;
+
+                        ////CopyReady
+                        //DownloadManager.Fileinfo = new FileInfo( TargetFilePath);
+
+                        //long remain2 = 0;
+
+                        //if (DownloadManager.Fileinfo.Length < 1024 * 1024 * 1024)
+                        //    remain2 = DownloadManager.Fileinfo.Length;
+                        //else
+                        //    remain2 = DownloadManager.Fileinfo.Length % 1024 * 1024 * 1024;
+
+                        //DownloadManager.BlockCollection.Clear();
+                        //for (int index = 0; index < DownloadManager.BlockCount; index++)
+                        //{
+                        //    if (index == DownloadManager.BlockCount - 1)
+                        //        DownloadManager.BlockCollection.Add(new Block(DownloadManager.Fileinfo.Name, index, remain2));
+                        //    else
+                        //        DownloadManager.BlockCollection.Add(new Block(DownloadManager.Fileinfo.Name, index, 1024 * 1024 * 1024));   //1GB 기준
+                        //}
+                        ////-----------
+
+
+
+                        //BinaryReader reader = new BinaryReader(fileStr);
+                        //for (long index = 0; index < count; index++)
+                        //{
+                        //    if (index == count - 1)
+                        //        buffer = reader.ReadBytes((int)remain);
+                        //    else
+                        //        buffer = reader.ReadBytes(1024);
+
+                        //    DownloadManager.BlockCollection[BlockIndex].bytesCollection[BytesIndex++] = buffer;
+
+                        //    TotalReadByte += buffer.Count();
+
+                        //    if (TotalReadByte == BlockSize ||
+                        //        (TotalReadByte > BlockSize && TotalReadByte % BlockSize == 0))
+                        //    {
+                        //        BlockIndex++;
+                        //        BytesIndex = 0;
+                        //    }
+                        //}
+                        //reader.Close();
+
+                        DownloadManager DownloadManager = new DownloadManager();
+
+                        try
+                        {
+                            string TargetFilePath = @"C:\새 폴더\7gb.zip";
+
+                            using (FileStream fsSource = new FileStream(TargetFilePath, FileMode.Open, FileAccess.Read))
+                            {
+                                long fileLength = fsSource.Length;
+
+                                long count = fileLength / 1024 + 1;
+
+                                long remain = fileLength % 1024;
+
+                                byte[] buffer = new byte[1024];
+
+                                int BlockIndex = 0;
+                                int BytesIndex = 0;
+
+                                long BlockSize = 1024 * 1024 * 1024;
+                                long TotalReadByte = 0;
+
+                                //CopyReady
+                                DownloadManager.Fileinfo = new FileInfo(TargetFilePath);
+
+                                long remain2 = 0;
+
+                                if (DownloadManager.Fileinfo.Length < 1024 * 1024 * 1024)
+                                    remain2 = DownloadManager.Fileinfo.Length;
+                                else
+                                    remain2 = DownloadManager.Fileinfo.Length % 1024 * 1024 * 1024;
+
+                                DownloadManager.BlockCollection.Clear();
+                                for (int index = 0; index < DownloadManager.BlockCount + 1; index++)
+                                {
+                                    if (index == DownloadManager.BlockCount - 1)
+                                        DownloadManager.BlockCollection.Add(new Block(DownloadManager.Fileinfo.Name, index, 1024 * 1024 * 1024));
+                                    else
+                                        DownloadManager.BlockCollection.Add(new Block(DownloadManager.Fileinfo.Name, index, 1024 * 1024 * 1024));   //1GB 기준
+                                }
+                                //-----------
+
+                                for (long index = 0; index < count; index++)
+                                {
+                                    if (BytesIndex == 462845)
+                                    {
+
+                                    }
+
+                                    if (index == count - 1)
+                                    {
+                                        fsSource.Read(buffer, 0 , (int)remain);
+                                    }
+                                    else
+                                    {
+                                        fsSource.Read(buffer, 0 , 1024);
+                                    }
+
+                                    DownloadManager.BlockCollection[BlockIndex].bytesCollection[BytesIndex] = buffer;
+
+                                    BytesIndex++;
+
+                                    TotalReadByte += buffer.Count();
+
+                                    if (TotalReadByte == BlockSize ||
+                                        (TotalReadByte > BlockSize && TotalReadByte % BlockSize == 0))
+                                    {
+                                        BlockIndex++;
+                                        BytesIndex = 0;
+                                    }
+                                }
+
+                                //BinaryReader reader = new BinaryReader(fileStr);
+                                //for (long index = 0; index < count; index++)
+                                //{
+                                //    if (index == count - 1)
+                                //        buffer = reader.ReadBytes((int)remain);
+                                //    else
+                                //        buffer = reader.ReadBytes(1024);
+
+                                //    DownloadManager.BlockCollection[BlockIndex].bytesCollection[BytesIndex++] = buffer;
+
+                                //    TotalReadByte += buffer.Count();
+
+                                //    if (TotalReadByte == BlockSize ||
+                                //        (TotalReadByte > BlockSize && TotalReadByte % BlockSize == 0))
+                                //    {
+                                //        BlockIndex++;
+                                //        BytesIndex = 0;
+                                //    }
+                                //}
+                                //reader.Close();
+
+                            }
+                        }
+                        catch (FileNotFoundException ioEx)
+                        {
+                            Console.WriteLine(ioEx.Message);
+                        }
+
+                        //CopyEnd
+
+                        string path111 = @"C:\Users\jyou_estsecurity\Documents\repos\FileEditor_Toy\CommnunicationTest_Server\bin\Debug\Temp";
+                        FileHelper.CreateDirectory(path111);
+
+                        using (FileStream fileStr111 = new FileStream(Path.Combine(path111, DownloadManager.Fileinfo.Name), FileMode.Create, FileAccess.Write))
+                        {
+                            foreach (var Block in DownloadManager.BlockCollection)
+                            {
+                                foreach (var bytes in Block.bytesCollection)
+                                {
+                                    fileStr111.Write(bytes, 0, bytes.Count());
+                                }
+                            }
+                        }
+
+                        //FileStream fileStr111 = new FileStream(Path.Combine(path111, DownloadManager.Fileinfo.Name), FileMode.Create, FileAccess.Write);
+                        //BinaryWriter writer = new BinaryWriter(fileStr111);
+                        //foreach (var Block in DownloadManager.BlockCollection)
+                        //{
+                        //    foreach (var bytes in Block.bytesCollection)
+                        //    {
+                        //        writer.Write(bytes, 0, bytes.Count());
+                        //    }
+                        //}
+                        //writer.Close();
+                        //-----------
+
+
+                        break;
+                    }
+                case "await":
+                    {
+                        Console.WriteLine("mainThread : 1");
+                        Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                        button1_Click();
+                        break;
+                    }
+
+                case "base64":
+                    {
+                        var st = ToBase64Encode("aaa|aaa");
+                        var st1 = ToBase64Encode("111|111");
+                        var st2 = ToBase64Encode("222|222");
+                        var st3 = ToBase64Encode("ES_Login_KEY");
+                        break;
+                    }
+
+                case "DictionaryBinding":
+                    {
+
+                        ObservableDictionary.Add("김나영", new PersonB() { Age = 22222, Name = "2222" });
+
+
+                        break;
+                    }
+
+                case "DictionaryBinding2":
+                    {
+
+                        ObservableDictionary["김유정"] = new PersonB() { Age = 33333, Name = "3333" };
+                        break;
+                    }
+                case "observable":
+                    {
+                        Console.WriteLine($"Thread.CurrentThread : {Thread.CurrentThread.ManagedThreadId}");
+                        GetUpdatePort(1).SubscribeOn(ThreadPoolScheduler.Instance).Subscribe(NextFunction, ErrorFunction , CompletedFunction );
+
+                        Console.WriteLine($"observable");
+                        
+                        break;
+                    }
+                case "observable2":
+                    {
+                        Console.WriteLine($"Thread.CurrentThread : {Thread.CurrentThread.ManagedThreadId}");
+                        GetUpdatePort(2).Subscribe(NextFunction, ErrorFunction, CompletedFunction);
+                        Console.WriteLine($"observable1");
+                        break;
+                    }
+                case "observable3":
+                    {
+                        break;
+                    }
+
+
                 default:
                     break;
+                    
             }
+        }
+
+        private void NextFunction(int updatePort)
+        {
+            Console.WriteLine($"NextFunction");
+            Console.WriteLine($"Thread.CurrentThread : {Thread.CurrentThread.ManagedThreadId}");
+            ObservableText2 = "NextFunction";
+            ObservableText = updatePort.ToString();
+        }
+        private void ErrorFunction(Exception e)
+        {
+            Console.WriteLine($"ErrorFunction");
+            Console.WriteLine($"Thread.CurrentThread : {Thread.CurrentThread.ManagedThreadId}");
+            ObservableText2 = "ErrorFunction";
+            ObservableText1 = e.ToString();
+        }
+        private void CompletedFunction()
+        {
+            Console.WriteLine($"CompletedFunction");
+            Console.WriteLine($"Thread.CurrentThread : {Thread.CurrentThread.ManagedThreadId}");
+            ObservableText2 = "CompletedFunction";
+        }
+
+        public string ObservableText { get; set; } = "TT";
+        public string ObservableText1 { get; set; } = "TT";
+        public string ObservableText2 { get; set; } = "TT";
+
+        private IObservable<int> GetUpdatePort(int i)
+        {
+            int updatePort = i;
+
+            return Observable.Create<int>(s =>
+            {
+                var result = true;
+                if (result)
+                {
+                    s.OnNext(updatePort);
+                    s.OnCompleted();
+                }
+                else
+                    s.OnError(new Exception("Asm Server Connect Error"));
+
+                return Disposable.Empty;
+            }).SubscribeOn(ThreadPoolScheduler.Instance);
+            //});
+            //}).SubscribeOn(TaskPoolScheduler.Default);
+        }
+
+        public Dictionary<string, string> Dictionary { get; set; } = new Dictionary<string, string>() { { "testKey", "testValue" } };
+        public ObservableDictionary<string, PersonB> ObservableDictionary { get; set; } = new ObservableDictionary<string, PersonB>() { { "김유정", new PersonB { Age=1111,Name="1111"} } };
+
+        public static string ToBase64Encode(string text)
+        {
+            if (String.IsNullOrEmpty(text))
+            {
+                return text;
+            }
+
+            byte[] textBytes = Encoding.UTF8.GetBytes(text);
+            return Convert.ToBase64String(textBytes);
+        }
+
+        public static string ToBase64Decode(string base64EncodedText)
+        {
+            if (String.IsNullOrEmpty(base64EncodedText))
+            {
+                return base64EncodedText;
+            }
+
+            byte[] base64EncodedBytes = Convert.FromBase64String(base64EncodedText);
+            return Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        private void button1_Click()
+        {
+            Console.WriteLine("button1_Click : 1");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            Run();  //UI Thread에서 실행
+            Console.WriteLine("button1_Click end");
+
+        }
+
+        private async void Run()
+        {
+            Console.WriteLine("Run : 1");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            int sum = await LongCalc2(5);
+
+            Console.WriteLine("check point");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            Console.WriteLine("Run end");
+
+        }
+
+        private async Task<int> LongCalc2(int times)
+        {
+            //UI Thread에서 실행
+            Console.WriteLine("LongCalc2 : 1");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            int result = 0;
+            for (int i = 0; i < times; i++)
+            {
+                result += i;
+                Console.WriteLine($"LongCalc2 : for {i}");
+                await Task.Delay(1000);
+            }
+            Console.WriteLine("LongCalc2 for end : 1");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+
+            var sum2 = await LongCalc3(5);
+            var sum = await Task.Factory.StartNew(() => LongCalc4(5));
+            var sum3 = await Task.Run(() => LongCalc5(5));
+
+            Console.WriteLine("LongCalc2 end");
+
+            return result;
+        }
+
+        private async Task<int> LongCalc3(int times)
+        {
+            Console.WriteLine("LongCalc3 : 1");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //UI Thread에서 실행
+            int result = 0;
+            for (int i = 0; i < times; i++)
+            {
+                result += i;
+                Console.WriteLine($"LongCalc3 : for {i}");
+                await Task.Delay(1000);
+            }
+
+            Console.WriteLine("LongCalc3 end");
+
+            return result;
+        }
+
+        private async Task<int> LongCalc4(int times)
+        {
+            Console.WriteLine("LongCalc4 : 3");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //UI Thread에서 실행
+            int result = 0;
+            for (int i = 0; i < times; i++)
+            {
+                result += i;
+                Console.WriteLine($"LongCalc4 : for {i}");
+                await Task.Delay(1000);
+            }
+
+            Console.WriteLine("LongCalc4 end");
+
+            return result;
+        }
+        private async Task<int> LongCalc5(int times)
+        {
+            Console.WriteLine("LongCalc5 : 3");
+            Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+            //UI Thread에서 실행
+            int result = 0;
+            for (int i = 0; i < times; i++)
+            {
+                result += i;
+                Console.WriteLine($"LongCalc5 : for {i}");
+                await Task.Delay(1000);
+            }
+
+            Console.WriteLine("LongCalc5 end");
+
+            return result;
         }
         Image img;
         BitmapImage btmImage;
@@ -409,6 +857,90 @@ namespace PMEditor.ViewModels
                 return false;
             }
             return true;
+        }
+    }
+    public class DownloadManager
+    {
+        public readonly int BlockSize = 1024 * 1024 * 1024;
+
+        public FileInfo Fileinfo { get; set; }
+
+        public ObservableCollection<Block> BlockCollection { get; set; } = new ObservableCollection<Block>();
+
+        public long BlockCount
+        {
+            get
+            {
+                if (Fileinfo != null)
+                {
+                    if (Fileinfo.Length < BlockSize)
+                        return 1;
+
+                    if (Fileinfo.Length / BlockSize == 0)
+                        return Fileinfo.Length / BlockSize;
+                    else
+                        return Fileinfo.Length / BlockSize + 1;
+                }
+                return -1;
+            }
+        }
+    }
+
+    public class Block
+    {
+        public int index;
+        public string FileName;
+        public string SaveFileName { get => $"{FileName}_{index}.tmp"; }
+
+        public long Size;
+
+        public readonly int ReadByteSize = 1024;
+
+        public int totalReadByteSize
+        {
+            get
+            {
+                int Totalcount = 0;
+
+                foreach (var bytes in bytesCollection)
+                {
+                    Totalcount += bytes.Count();
+                }
+
+                return Totalcount;
+            }
+        }
+
+        public bool isFull { get => totalReadByteSize >= Size; }
+
+        public ObservableCollection<byte[]> bytesCollection { get; set; } = new ObservableCollection<byte[]>();
+
+        public Block(string _FileName, int _index, long _Size)
+        {
+            FileName = _FileName;
+            index = _index;
+            Size = _Size;
+            InitbytesCollection();
+        }
+
+        private void InitbytesCollection()
+        {
+            for (int i = 0; i < bytesLastIndex + 1; i++)
+            {
+                bytesCollection.Add(new byte[] { });
+            }
+        }
+
+        public long bytesLastIndex
+        {
+            get
+            {
+                if (Size % ReadByteSize == 0)
+                    return Size / ReadByteSize - 1;
+                else
+                    return Size / ReadByteSize;
+
+            }
         }
     }
 }

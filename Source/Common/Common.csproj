@@ -146,6 +146,7 @@
       <DependentUpon>DropItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Headeritem.cs" />
+    <Compile Include="Model\ObservableDictionary.cs" />
     <Compile Include="Model\Poketmon.cs" />
     <Compile Include="OCR\OCRManager.cs" />
     <Compile Include="PubSubEvents\CaptureAndContrastImageEvent.cs" />
