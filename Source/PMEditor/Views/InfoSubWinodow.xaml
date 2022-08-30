@@ -168,6 +168,18 @@
                         <views:BehindCodeTestView/>
                     </Border>
                 </TabItem>
+
+                <TabItem Header="SAMPLETEST2" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:BehindCodeTest2View/>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="JsonConverter" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:JsonConverterView/>
+                    </Border>
+                </TabItem>
             </TabControl>
         </Grid>
         <!-- define contents -->

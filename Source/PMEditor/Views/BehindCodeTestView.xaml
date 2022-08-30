@@ -12,42 +12,50 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <Grid Background="Navy" KeyDown="UserControl_KeyDown"   PreviewKeyDown="UserControl_KeyDown">
-        <StackPanel Orientation="Vertical">
-            <Button Command="{Binding TestCommand}" CommandParameter="PreviewPath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+        <ScrollViewer BorderThickness="0">
+        
+            <StackPanel Orientation="Vertical">
+                <Button Command="{Binding TestCommand}" CommandParameter="PreviewPath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
 
-            <Button Command="{Binding TestCommand}" CommandParameter="ReadAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="WriteAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="PingTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="INI만들기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="INI쓰기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="INI읽기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="JsonConvert" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="FileImage추출" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="FileImage설정" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="ByteTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="FileTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="await" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="base64" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="DictionaryBinding" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="DictionaryBinding2" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="observable" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="observable2" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <Button Command="{Binding TestCommand}" CommandParameter="observable3" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
-            <TextBlock Text="{Binding ObservableText}"/>
-            <TextBlock Text="{Binding ObservableText1}"/>
-            <TextBlock Text="{Binding ObservableText2}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="ReadAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="WriteAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="PingTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="INI만들기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="INI쓰기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="INI읽기" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="JsonConvert" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="FileImage추출" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="FileImage설정" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="ByteTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="FileTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="await" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="base64" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="DictionaryBinding" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="DictionaryBinding2" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="observable" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="observable2" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="observable3" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
+                <TextBlock Text="{Binding ObservableText}"/>
+                <TextBlock Text="{Binding ObservableText1}"/>
+                <TextBlock Text="{Binding ObservableText2}"/>
+
+                <Image Source="pack://application:,,,/Common;component/Images/PMIcon.png" Stretch="None"
+                       Width="{Binding RelativeSource={RelativeSource self}, Path=Source.Width}"
+                       Height="{Binding RelativeSource={RelativeSource self}, Path=Source.Height}"/>
 
 
-            <ListView ItemsSource="{Binding ObservableDictionary.Keys}">
-                <!--<ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
-                        <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}" Width="150"/>
-                    </GridView>
-                </ListView.View>-->
-            </ListView>
-        </StackPanel>
+
+                <ListView ItemsSource="{Binding ObservableDictionary.Keys}">
+                    <!--<ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                            <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}" Width="150"/>
+                        </GridView>
+                    </ListView.View>-->
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

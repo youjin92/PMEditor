@@ -67,6 +67,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\JsonConverterViewModel.cs" />
+    <Compile Include="ViewModels\BehindCodeTest2ViewModel.cs" />
     <Compile Include="ViewModels\BehindCodeTestViewModel.cs" />
     <Compile Include="ViewModels\DragAndDropFileViewModel.cs" />
     <Compile Include="ViewModels\InfoSubWinodowViewModel.cs" />
@@ -77,6 +79,12 @@
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
     <Compile Include="ViewModels\TTSTestViewModel.cs" />
     <Compile Include="ViewModels\UITestViewModel.cs" />
+    <Compile Include="Views\JsonConverterView.xaml.cs">
+      <DependentUpon>JsonConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BehindCodeTest2View.xaml.cs">
+      <DependentUpon>BehindCodeTest2View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BehindCodeTestView.xaml.cs">
       <DependentUpon>BehindCodeTestView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +115,14 @@
     <Compile Include="Views\UITestView.xaml.cs">
       <DependentUpon>UITestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\JsonConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BehindCodeTest2View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\BehindCodeTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
