@@ -24,6 +24,7 @@
             <Button Command="{Binding ReadRowCommand}" Content="로우 읽기" Margin="10"/>
             <Button Command="{Binding InSertRowCommand}" Content="로우 추가" Margin="10"/>
             <Button Command="{Binding CloseCommand}" Content="닫기" Margin="10"/>
+            <Button Command="{Binding TestCommand}" Content="Test" Margin="10"/>
             <TextBox Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}" Margin="10" Padding="5">
                 <TextBox.InputBindings>
                     <KeyBinding Key="Enter" Command="{Binding ReadRowCommand}"/>

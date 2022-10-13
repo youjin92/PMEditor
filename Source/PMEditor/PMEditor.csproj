@@ -48,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +68,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BehindCodeTest5ViewModel.cs" />
+    <Compile Include="ViewModels\BehindCodeTest4ViewModel.cs" />
+    <Compile Include="ViewModels\BehindCodeTest3ViewModel.cs" />
     <Compile Include="ViewModels\JsonConverterViewModel.cs" />
     <Compile Include="ViewModels\BehindCodeTest2ViewModel.cs" />
     <Compile Include="ViewModels\BehindCodeTestViewModel.cs" />
@@ -79,6 +83,15 @@
     <Compile Include="ViewModels\SimpleImageViewModel.cs" />
     <Compile Include="ViewModels\TTSTestViewModel.cs" />
     <Compile Include="ViewModels\UITestViewModel.cs" />
+    <Compile Include="Views\BehindCodeTest5View.xaml.cs">
+      <DependentUpon>BehindCodeTest5View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BehindCodeTest4View.xaml.cs">
+      <DependentUpon>BehindCodeTest4View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BehindCodeTest3View.xaml.cs">
+      <DependentUpon>BehindCodeTest3View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\JsonConverterView.xaml.cs">
       <DependentUpon>JsonConverterView.xaml</DependentUpon>
     </Compile>
@@ -115,6 +128,18 @@
     <Compile Include="Views\UITestView.xaml.cs">
       <DependentUpon>UITestView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\BehindCodeTest5View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BehindCodeTest4View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BehindCodeTest3View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\JsonConverterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -254,6 +279,12 @@
       <Project>{43ca7f5b-1d7f-45e9-8c16-e9d5dc0192c2}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\capture2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

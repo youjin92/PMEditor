@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="PMEditor.Views.BehindCodeTest4View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:common="clr-namespace:Common;assembly=Common"
+             xmlns:local="clr-namespace:PMEditor"
+             xmlns:viewmodels="clr-namespace:PMEditor.ViewModels"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Background="DimGray">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" MinWidth="200"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="Convert" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <TextBox Text="{Binding Text2}" MinWidth="200"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="Input" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"
+                        />
+            </StackPanel>
+            <TextBlock Text="{Binding DPText}" 
+                       common:TextBlockHighlighter.Selection="{Binding DataContext.Text,
+                        Mode=OneWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       common:TextBlockHighlighter.HighlightColor="Blue"
+                       common:TextBlockHighlighter.Forecolor="Red"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="Test" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
+            <TextBlock Text="{Binding DPText}" />
+
+        </StackPanel>
+    </Grid>
+</UserControl>

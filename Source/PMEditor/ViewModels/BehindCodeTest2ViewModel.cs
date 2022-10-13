@@ -13,6 +13,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Runtime.InteropServices;
+
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Runtime.Caching;
+using Common;
 
 namespace PMEditor.ViewModels
 {
@@ -30,6 +33,14 @@ namespace PMEditor.ViewModels
         {
 
         }
+
+        public ImageSource Source1 { get; set; } 
+        public ImageSource Source2 { get; set; } 
+        public ImageSource Source3 { get; set; } 
+        public ImageSource Source4 { get; set; } 
+        public ImageSource Source5 { get; set; } 
+        public ImageSource Source6 { get; set; } 
+        public ImageSource Source7 { get; set; } 
 
         private DelegateCommand<string> _TestCommand;
         public DelegateCommand<string> TestCommand => _TestCommand ?? (_TestCommand = new DelegateCommand<string>(ExecuteTestCommand));
@@ -100,17 +111,149 @@ namespace PMEditor.ViewModels
                     }
                 case "Test3":
                     {
-                        var path = "!Test!";
-                        byte[] bytes = Encoding.Default.GetBytes(path);
-                        string utf8_path = Encoding.UTF8.GetString(bytes);
+                        ObjectCache cache = MemoryCache.Default;
+                        CacheItemPolicy policy = new CacheItemPolicy();
 
-                        byte[] utf8Bytes = Encoding.UTF8.GetBytes(utf8_path);
-                        string Unicode = Encoding.Default.GetString(utf8Bytes);
+                        List<string> filePaths = new List<string>();
+                        filePaths.Add("c:\\새 폴더\\새로운 2.txt");
+                        filePaths.Add("c:\\새 폴더\\새로운 3.txt");
+
+                        policy.ChangeMonitors.Add(new
+                        HostFileChangeMonitor(filePaths));
+
+                        // Fetch the file contents.  
+                        string fileContents = File.ReadAllText("c:\\새 폴더\\새로운 2.txt");
+                        //string fileContent3s = File.ReadAllText("c:\\새 폴더\\새로운 3.txt");
+
+                        cache.Set("filecontents", fileContents, policy);
+                        //cache.Set("filecontent3s", fileContent3s, policy);
+
                         break;
                     }
+                case "Test4":
+                    {
+                        ObjectCache cache = MemoryCache.Default;
+                        string fileContents = cache["filecontents"] as string;
+
+                        if (fileContents == null)
+                        {
+                            CacheItemPolicy policy = new CacheItemPolicy();
+                            policy.AbsoluteExpiration =
+                                DateTimeOffset.Now.AddSeconds(10.0);
+
+
+                            List<string> filePaths = new List<string>();
+                            filePaths.Add("c:\\새 폴더\\새로운 2.txt");
+                            filePaths.Add("c:\\새 폴더\\새로운 3.txt");
+
+                            policy.ChangeMonitors.Add(new
+                                HostFileChangeMonitor(filePaths));
+
+                            // Fetch the file contents.
+                            fileContents = File.ReadAllText("c:\\새 폴더\\새로운 2.txt");
+
+                            cache.Set("filecontents", fileContents, policy);
+                        }
+
+                        TestText = cache["filecontents"] as string; ;
+                        TestText2 = cache["filecontent3s"] as string; ;
+                        break;
+                    }
+
+                case "Test5":
+                    {
+                        var Today = DateTime.Now;
+                        var Add13hour = Today.AddHours(13);
+
+                        var test = Add13hour - Today;
+
+                        var diff = test.Days;
+                        var diff2 = Add13hour.Day - Today.Day;
+                        
+
+                        break;
+                    }
+
+                case "Test6":
+                    {
+                        /*
+                          버전이 2자리로 변경되었으나 기존 버전 업데이트 에러를 해결하기 위해 
+                          AsmConsoleVersion.xml 내용은 기존과 동일한 자리수를 유지
+
+                          left : 현재버전 2자리
+                          right : xml 내 currentVersion 4자리
+
+                          앞에 2자리는 스킵
+                        */
+                        int ret = -1;
+
+                        string left = "61.1201";
+                        string right = "5.1.0.6002";
+
+                        var leftVersion = left.Split('.');
+                        var rightVersion = right.Split('.');
+
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int comp = CompareSector(leftVersion[leftVersion.Length - 2 + i], rightVersion[rightVersion.Length - 2 + i]);
+                            if (comp != 0)
+                                ret = comp;
+                        }
+
+                        Console.WriteLine(ret);
+
+                        GetIconFromImage("");
+
+                        break;
+                    }
+
                 default:
                     break;
 
+            }
+        }
+
+        public Icon GetIconFromImage(string path)
+        {
+            var uri = new Uri("pack://application:,,,/Images/capture2.png");
+            var bitmap_image = new BitmapImage(uri);
+
+            var bitmap = BitmapImage2Bitmap(bitmap_image);
+
+            return (Icon)Icon.FromHandle(bitmap.GetHicon()).Clone();
+        }
+
+
+        private Bitmap BitmapImage2Bitmap(BitmapImage bitmapImage)
+        {
+            // BitmapImage bitmapImage = new BitmapImage(new Uri("../Images/test.png", UriKind.Relative));
+
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(outStream);
+
+                return new Bitmap(bitmap);
+            }
+        }
+
+        public string TestText { get; set; } = "test";
+        public string TestText2 { get; set; } = "test2";
+
+        private int CompareSector(string left, string right)
+        {
+            if (int.TryParse(left, out int leftI) && int.TryParse(right, out int rightI))
+            {
+                return leftI.CompareTo(rightI);
+            }
+            else
+            {
+                if (left.Equals(right))
+                    return 0;
+                else
+                    return -1;
             }
         }
     }

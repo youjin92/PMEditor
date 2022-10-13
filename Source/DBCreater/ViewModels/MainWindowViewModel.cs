@@ -9,9 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SQLite;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace DBCreater.ViewModels
 {
@@ -96,6 +98,14 @@ namespace DBCreater.ViewModels
             DBManager.Close();
         }
 
+        private DelegateCommand _TestCommand;
+        public DelegateCommand TestCommand =>_TestCommand ?? (_TestCommand = new DelegateCommand(ExecuteTestCommand));
+        void ExecuteTestCommand()
+        {
+            GetIconFromImage("");
+
+        }
+
         private DelegateCommand _InSertRowCommand;
         public DelegateCommand InSertRowCommand =>_InSertRowCommand ?? (_InSertRowCommand = new DelegateCommand(ExecuteInSertRowCommand));
         void ExecuteInSertRowCommand()
@@ -143,6 +153,16 @@ namespace DBCreater.ViewModels
 
             //엑셀파일 받아서 DB인서트
             DBManager.InsertRow(sql);
+        }
+
+        public Icon GetIconFromImage(string path)
+        {
+            var uri = new Uri("pack://application:,,,/Images/capture3.png");
+            var bitmap_image = new BitmapImage(uri);
+
+            var bitmap = (Bitmap)Bitmap.FromStream(bitmap_image.StreamSource);
+
+            return (Icon)Icon.FromHandle(bitmap.GetHicon()).Clone();
         }
     }
 }

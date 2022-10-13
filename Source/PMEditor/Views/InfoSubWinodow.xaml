@@ -175,6 +175,19 @@
                     </Border>
                 </TabItem>
 
+                <TabItem Header="T3" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:BehindCodeTest3View/>
+                    </Border>
+                </TabItem>
+
+
+                <TabItem Header="T4" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:BehindCodeTest4View/>
+                    </Border>
+                </TabItem>
+
                 <TabItem Header="JsonConverter" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:JsonConverterView/>

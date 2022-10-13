@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="PMEditor.Views.BehindCodeTest3View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:viewmodels="clr-namespace:PMEditor.ViewModels"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Background="DimGray">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding TestCommand}" CommandParameter="ShellIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="ImageredIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="DDOResIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="morIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="GetDrive" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            </StackPanel>
+            
+            <DataGrid ItemsSource="{Binding ListCollection}" VerticalScrollBarVisibility="Auto" MaxHeight="600" 
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="index" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding index}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Content" Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Source}" Width="32" Height="32"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid ItemsSource="{Binding DriveCollection}" VerticalScrollBarVisibility="Auto" MaxHeight="300" 
+                      AutoGenerateColumns="True">
+  
+            </DataGrid>
+            <Image Source="{Binding Source1}" Width="32" Height="32"/>
+            <Image Source="{Binding Source2}" Width="32" Height="32"/>
+            <Image Source="{Binding Source3}" Width="32" Height="32"/>
+            <Image Source="{Binding Source4}" Width="32" Height="32"/>
+            <Image Source="{Binding Source5}" Width="32" Height="32"/>
+            <Image Source="{Binding Source6}" Width="32" Height="32"/>
+            <Image Source="{Binding Source7}" Width="32" Height="32"/>
+            <Image Source="{Binding Source8}" Width="32" Height="32"/>
+            <Image Source="{Binding Source9}" Width="50" Height="50"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

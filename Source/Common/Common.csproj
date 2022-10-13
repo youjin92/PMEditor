@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Excel\ExcelManager.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="ImageUtil.cs" />
     <Compile Include="Markups\CommonImageSourceExtension.cs" />
     <Compile Include="Markups\EnumBindingSourceExtension.cs" />
     <Compile Include="Model\Draggable.cs" />
@@ -157,6 +158,8 @@
     <Compile Include="PubSubEvents\SearchItemEvent.cs" />
     <Compile Include="Regions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShellApiWrapper.cs" />
+    <Compile Include="TextBlockHighlighter .cs" />
     <Compile Include="UserControls\AdditionalFeaturesTextBox.cs" />
     <Compile Include="UserControls\UCIncludeFileName.cs" />
   </ItemGroup>

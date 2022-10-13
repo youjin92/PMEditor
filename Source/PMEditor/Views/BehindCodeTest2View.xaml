@@ -15,10 +15,16 @@
             <Button Command="{Binding TestCommand}" CommandParameter="Test" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="Test2" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
             <Button Command="{Binding TestCommand}" CommandParameter="Test3" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
-            <Viewbox Width="300" HorizontalAlignment="Left" Stretch="Uniform">
-                <TextBlock Text="11111111111111111111tttuuuuuuuuuu"/>
-            </Viewbox>
-       
+            <Button Command="{Binding TestCommand}" CommandParameter="Test4" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="Test5" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            <Button Command="{Binding TestCommand}" CommandParameter="Test6" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+            <Image Source="{Binding Source1}" Width="32" Height="32"/>
+            <Image Source="{Binding Source2}" Width="32" Height="32"/>
+            <Image Source="{Binding Source3}" Width="32" Height="32"/>
+            <Image Source="{Binding Source4}" Width="32" Height="32"/>
+            <Image Source="{Binding Source5}" Width="32" Height="32"/>
+            <Image Source="{Binding Source6}" Width="32" Height="32"/>
+            <Image Source="{Binding Source7}" Width="32" Height="32"/>
         </StackPanel>
     </Grid>
 </UserControl>
