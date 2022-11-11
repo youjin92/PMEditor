@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBCreater", "DBCreater\DBCr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridViewSerialization_WPF", "..\..\..\..\Downloads\GridViewSerialization\GridViewSerialization_WPF.csproj", "{230162AE-2B9C-4F2A-814F-24858E2E15C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test_Process", "Test_Process\Test_Process.csproj", "{2100C91E-63A7-4A37-BB6E-DE8A5618F0AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{230162AE-2B9C-4F2A-814F-24858E2E15C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{230162AE-2B9C-4F2A-814F-24858E2E15C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{230162AE-2B9C-4F2A-814F-24858E2E15C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2100C91E-63A7-4A37-BB6E-DE8A5618F0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2100C91E-63A7-4A37-BB6E-DE8A5618F0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2100C91E-63A7-4A37-BB6E-DE8A5618F0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2100C91E-63A7-4A37-BB6E-DE8A5618F0AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
