@@ -27,6 +27,7 @@
             <Button Command="{Binding TestCommand}" CommandParameter="Test" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
             <Button Command="{Binding TestCommand}" CommandParameter="EventWaitHandle" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
             <Button Command="{Binding TestCommand}" CommandParameter="EventWaitHandle2" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
+            <Button Command="{Binding TestCommand}" CommandParameter="EventWaitHandle4" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
             <Button Command="{Binding TestCommand}" CommandParameter="ForeachCallbyreference" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
 
             <TextBlock Text="{Binding DPText}" />

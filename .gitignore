@@ -4,3 +4,5 @@ obj/
 *.suo
 Source/.vs/PMEditor/v16/*.suo
 Source/.vs/PMEditor/v15/*
+Source/PMEditor/Views/BehindCodeTest4View.xaml.bak
+Source/PMEditor/Views/BehindCodeTest4View.xaml.orig
