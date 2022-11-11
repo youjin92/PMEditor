@@ -12,6 +12,7 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding TestCommand}" CommandParameter="ShellIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="ShellIconsLib2" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
