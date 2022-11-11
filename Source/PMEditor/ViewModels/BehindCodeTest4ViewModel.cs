@@ -73,13 +73,6 @@ namespace PMEditor.ViewModels
                         Task.Run(() => CheckLogin());
                         break;
                     }
-
-                case "Encryptor":
-                    {
-
-                        break;
-                    }
-
                 case "ForeachCallbyreference":
                     {
                         List<PersonB> intarray = new List<PersonB> { new PersonB { Name = "aaa", Age = 19 }, new PersonB { Name = "bbb", Age = 19 } };
