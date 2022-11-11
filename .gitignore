@@ -2,3 +2,4 @@ bin/
 obj/
 *.suo
 Source/.vs/PMEditor/v16/*.suo
+Source/.vs/PMEditor/v15/
