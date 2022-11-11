@@ -15,10 +15,11 @@
         <ScrollViewer BorderThickness="0">
         
             <StackPanel Orientation="Vertical">
+                <Button Command="{Binding TestCommand}" CommandParameter="test" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+
                 <Button Command="{Binding TestCommand}" CommandParameter="PreviewPath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
                 <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
                 <Button Command="{Binding TestCommand}" CommandParameter="CombinePath" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
-
                 <Button Command="{Binding TestCommand}" CommandParameter="ReadAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
                 <Button Command="{Binding TestCommand}" CommandParameter="WriteAllBytes" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>
                 <Button Command="{Binding TestCommand}" CommandParameter="PingTest" Content="{Binding RelativeSource={RelativeSource self}, Path=CommandParameter}"/>

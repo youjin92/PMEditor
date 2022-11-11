@@ -31,6 +31,8 @@
             <Button Command="{Binding TestCommand}" CommandParameter="ForeachCallbyreference" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
             <Button Command="{Binding TestCommand}" CommandParameter="ForeachCallbyreference2" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
             <Button Command="{Binding TestCommand}" CommandParameter="ForeachCallbyreference3" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
+            <Button Command="{Binding TestCommand}" CommandParameter="ForeachCallbyreference99" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" />
+
 
             <TextBlock Text="{Binding DPText}" />
 
