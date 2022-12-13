@@ -26,6 +26,8 @@ using static Common.ShellApiWrapper;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Net.Http;
+using System.Net;
 
 namespace PMEditor.ViewModels
 {
@@ -92,7 +94,70 @@ namespace PMEditor.ViewModels
 
                         break;
                     }
+                case "httpRequest":
+                    {
+                        //string url = @"https://www.op.gg/summoners/kr/신림동김용문";
+                        string url = @"https://kr.whatismymmr.com/신림동김용문";
+                        //string url = "https://naver.com/get";
+                        //test url
+                        string responseText = string.Empty;
 
+                        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                        request.Method = "GET";
+                        request.Timeout = 30 * 1000;
+                        // 30 * 1000ms
+                        request.Headers.Add("Authorization", "SEG=+8dq");
+                        // 헤더 추가
+
+                        using (HttpWebResponse resp = (HttpWebResponse)request.GetResponse())
+                        {
+                            HttpStatusCode status = resp.StatusCode;
+                            // response 매시지 중 StatusCode를 가져온다.
+
+                            Console.WriteLine(status);
+                            // 정상이면 "OK"
+
+                            Stream respStream = resp.GetResponseStream();
+                            // Response Data 내용은 GetResponseStream 메서드로부터 얻어낸 스트림을 읽어 가져올 수 있음
+                            using (StreamReader sr = new StreamReader(respStream))
+                            {
+                                responseText = sr.ReadToEnd();
+                            }
+                        }
+
+                        Console.WriteLine(responseText);
+                        break;
+                    }
+
+                case "LinqTest":
+                    {
+                        ObservableCollection<int> a = new ObservableCollection<int>() { 1, 2, 3, 4, 5, 6, 7 };
+
+                        int[] d = new int[] { 22, 3, 4, 5, 6, 78, };
+
+                        var c = a.Where(e => e > 3).FirstOrDefault();
+
+                        var f = d.Where(e => e > 3).FirstOrDefault();
+
+                        if (a.Where(e => e > 3).Any())
+                        {
+                            c = 8;
+                        }
+
+                        if (a.Where(e => e > 3).Any(e => e > 8))
+                        {
+                            c = 8;
+                        }
+
+                        break;
+                    }
+
+                case "DumpTest":
+                    {
+                        int a = 0;
+                        double b = 10 / a;
+                        break;
+                    }
                 default:
                     break;
 
