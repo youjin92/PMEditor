@@ -188,6 +188,12 @@
                     </Border>
                 </TabItem>
 
+                <TabItem Header="T5" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                    <Border BorderBrush="#FF9800" BorderThickness="5">
+                        <views:BehindCodeTest5View/>
+                    </Border>
+                </TabItem>
+
                 <TabItem Header="JsonConverter" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                     <Border BorderBrush="#FF9800" BorderThickness="5">
                         <views:JsonConverterView/>

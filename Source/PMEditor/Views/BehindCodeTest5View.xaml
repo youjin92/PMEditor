@@ -11,9 +11,57 @@
     <Grid Background="DimGray">
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding TestCommand}" CommandParameter="ShellIconsLib" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
-                <Button Command="{Binding TestCommand}" CommandParameter="ShellIconsLib2" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}"/>
+                <Button Command="{Binding TestCommand}" CommandParameter="MySqlConnection" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" Width="150"/>
             </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding TestCommand}" CommandParameter="AddItem" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" Width="150"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ADD Name  : "/>
+                    <TextBox Text="{Binding Name}" MinWidth="150"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="ADD Age    : "/>
+                    <TextBox Text="{Binding Age}" MinWidth="150"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding TestCommand}" CommandParameter="Write" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" Width="150"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Write Name  : "/>
+                    <TextBox Text="{Binding WriteName}" MinWidth="150"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Write Age    : "/>
+                    <TextBox Text="{Binding WriteAge}" MinWidth="150"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding TestCommand}" CommandParameter="Read" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" Width="150"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Read Name  : "/>
+                    <TextBox Text="{Binding ReadName}" MinWidth="150"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Read Age    : "/>
+                    <TextBox Text="{Binding ReadAge}" MinWidth="150"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding TestCommand}" CommandParameter="Delete" Content="{Binding RelativeSource={RelativeSource self},Path=CommandParameter}" Width="150"/>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Delete Name  : "/>
+                    <TextBox Text="{Binding DeleteName}" MinWidth="150"/>
+                </StackPanel>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </UserControl>
