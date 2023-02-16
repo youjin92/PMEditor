@@ -24,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Runtime.Caching;
 using Common;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace PMEditor.ViewModels
 {
@@ -38,7 +39,9 @@ namespace PMEditor.ViewModels
         public int ReadAge { get; set; }
         public string DeleteName { get; set; }
 
-        MySqlConnection connection;
+        DBManager2 DBManager = new DBManager2();
+
+        List<Player> playerlist = new List<Player>();
 
 
         public BehindCodeTest5ViewModel()
@@ -53,119 +56,36 @@ namespace PMEditor.ViewModels
             {
                 case "MySqlConnection":
                     {
-                        connection = new MySqlConnection("Server=127.0.0.1;Database=member;Uid=root;Pwd=1q2w3e4r!!;");
+                        DBManager.Connect();
                         break;
                     }
 
                 case "AddItem":
                     {
-                        string insertQuery = $"INSERT INTO member_table(name,age) VALUES('{Name}', {Age})";
-
-                        connection.Open();
-                        MySqlCommand command = new MySqlCommand(insertQuery, connection);
-
-                        try//예외 처리
-                        {
-                            // 만약에 내가처리한 Mysql에 정상적으로 들어갔다면 메세지를 보여주라는 뜻이다
-                            if (command.ExecuteNonQuery() == 1)
-                            {
-                                MessageBox.Show("정상적으로 갔다");
-                            }
-                            else
-                            {
-                                MessageBox.Show("비정상 이당");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-
-
-                        connection.Close();
+                        DBManager.Insert(Name, Age);
                         break;
 
                     }
 
                 case "Write":
                     {
-                        connection.Open();
-                        string insertQuery = $"UPDATE member.member_table SET age={WriteAge} WHERE name='{WriteName}'";
-
-                        MySqlCommand command = new MySqlCommand(insertQuery, connection);
-
-                        try//예외 처리
-                        {
-                            // 만약에 내가처리한 Mysql에 정상적으로 들어갔다면 메세지를 보여주라는 뜻이다
-                            if (command.ExecuteNonQuery() == 1)
-                            {
-                                MessageBox.Show("정상적으로 갔다");
-                            }
-                            else
-                            {
-                                MessageBox.Show("비정상 이당");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                        connection.Close();
-
+                        DBManager.WriteMMR(WriteName, WriteAge);
                         break;
                     }
 
                 case "Read":
                     {
-                        try
-                        {
-                            connection.Open();
-                            string sql = $"SELECT name, age FROM member.member_table WHERE name='{ReadName}'";
+                        playerlist.Clear();
+                        DBManager.ReadDB((name, mmr) => {
+                            playerlist.Add(new Player { Name = name, MMR = mmr });
+                        });
 
-                            MySqlCommand cmd = new MySqlCommand(sql, connection);
-                            MySqlDataReader rdr = cmd.ExecuteReader();
-
-                            while (rdr.Read())
-                            {
-                                Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                                ReadName = rdr[0].ToString();
-                                ReadAge = Convert.ToInt32( rdr[1] );
-                            }
-
-                            rdr.Close();
-                            connection.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.ToString());
-                        }
                         break;
                     }
 
                 case "Delete":
                     {
-                        connection.Open();
-                        string insertQuery = $"DELETE FROM member.member_table WHERE name='{DeleteName}'";
-
-                        MySqlCommand command = new MySqlCommand(insertQuery, connection);
-
-                        try//예외 처리
-                        {
-                            // 만약에 내가처리한 Mysql에 정상적으로 들어갔다면 메세지를 보여주라는 뜻이다
-                            if (command.ExecuteNonQuery() == 1)
-                            {
-                                MessageBox.Show("정상적으로 갔다");
-                            }
-                            else
-                            {
-                                MessageBox.Show("비정상 이당");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
-                        connection.Close();
+                      
                         break;
                     }
 
@@ -175,5 +95,95 @@ namespace PMEditor.ViewModels
             }
         }
 
+    }
+
+    public class DBManager2
+    {
+        public readonly string DBServerIP = "192.168.75.196";
+        public readonly string Database = "member";
+        public readonly string id = "root";
+        public readonly string Pwd = "1q2w3e4r!!";
+
+        MySqlConnection connection;
+
+        public void Connect()
+        {
+            connection = new MySqlConnection($"Server={DBServerIP};Database={Database};Uid={id};Pwd={Pwd};");
+        }
+
+        public bool ExcuteCommand(string insertQuery, string name, int mmr)
+        {
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(insertQuery, connection);
+
+            bool ret = false;
+
+            try
+            {
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    Console.WriteLine($"{new StackFrame(1, true).GetMethod().Name} Success => name : {name}, mmr : {mmr}");
+                    ret = true;
+                }
+                else
+                {
+                    Console.WriteLine($"{new StackFrame(1, true).GetMethod().Name} Error => name : {name}, mmr : {mmr}"); 
+                    ret = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{ex.Message}");
+                ret = false;
+            }
+
+            connection.Close();
+            return ret;
+        }
+
+
+        public void Insert(string name, int mmr)
+        {
+            string insertQuery = $"INSERT INTO member_table(name,mmr) VALUES('{name}', {mmr})";
+
+            ExcuteCommand(insertQuery, name, mmr);
+        }
+
+        public void WriteMMR(string name, int mmr)
+        {
+            string insertQuery = $"UPDATE member.member_table SET mmr={mmr} WHERE name='{name}'";
+
+            ExcuteCommand(insertQuery, name, mmr);
+        }
+
+        public void ReadDB(Action<string, int> action)
+        {
+            try
+            {
+                connection.Open();
+                string sql = $"SELECT name, mmr FROM member.member_table";
+
+                MySqlCommand cmd = new MySqlCommand(sql, connection);
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    action(rdr[0].ToString(), Convert.ToInt32(rdr[1]));
+                }
+
+                rdr.Close();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+    }
+
+    public class Player : BindableBase
+    {
+        public string Name { get; set; } = "Name";
+        public int MMR { get; set; } = 0;
     }
 }
